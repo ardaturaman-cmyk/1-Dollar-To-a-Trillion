@@ -1,0 +1,1483 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#070a0f">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Zenginlik">
+<title>1 TL'den Zenginliğe</title>
+<style>
+:root{--bg:#070a0f;--card:#111821;--card2:#151c27;--border:#243040;--green:#4ade80;--green2:#22c55e;--text:#f5f7fa;--muted:#8b98a8;--yellow:#facc15;--blue:#60a5fa;--purple:#a78bfa;--pink:#f472b6;--orange:#f59e0b;--red:#ef4444}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{min-height:100%;overscroll-behavior:none}
+body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-variant-numeric:tabular-nums;user-select:none;-webkit-user-select:none}
+.app{max-width:560px;margin:auto;padding:calc(10px + env(safe-area-inset-top)) 12px calc(110px + env(safe-area-inset-bottom))}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+h1{font-size:19px;background:linear-gradient(90deg,#4ade80,#a3e635);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.muted{font-size:12px;color:var(--muted)}
+.small{font-size:11px}
+.pill{background:#1a2330;padding:5px 10px;border-radius:20px;font-size:11px;font-weight:700;border:1px solid var(--border);white-space:nowrap;color:var(--text)}
+.sticky{position:sticky;top:0;z-index:30;background:var(--bg);padding:4px 0 8px}
+.minibar{display:flex;justify-content:space-between;align-items:center;background:#0d141d;border:1px solid var(--border);border-radius:12px;padding:6px 12px;margin-bottom:6px;font-size:13px}
+.minibar b{color:var(--green)}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.tabs button{position:relative;background:#131a24;color:#b0bacc;border:1px solid var(--border);border-radius:12px;padding:9px 4px;font-weight:800;font-size:11px;cursor:pointer;transition:.15s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tabs button.active{background:linear-gradient(135deg,var(--green),var(--green2));color:#06130a;border-color:var(--green)}
+.tabs .dot{position:absolute;top:4px;right:6px;width:8px;height:8px;border-radius:50%;background:var(--yellow);display:none;box-shadow:0 0 6px var(--yellow)}
+.tabs .dot.on{display:block}
+.hero{background:linear-gradient(145deg,#0f2e1f,#0c131c);border:1px solid #1e4a35;border-radius:20px;padding:18px;position:relative;overflow:hidden}
+.cash{font-size:34px;font-weight:900;margin:2px 0;word-break:break-all}
+.income{color:var(--green);font-size:13px;font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.chip{font-size:11px;font-weight:800;padding:3px 8px;border-radius:10px;background:#1d3a2a;color:#bbf7d0;border:1px solid #2f6b4a}
+.chip.bad{background:#3a1d1d;color:#fecaca;border-color:#7f2a2a}
+.combo{position:absolute;top:14px;right:14px;font-weight:900;font-size:13px;color:var(--yellow);opacity:0;transition:.2s}
+.combo.on{opacity:1}
+.primary{width:100%;background:linear-gradient(135deg,var(--green),var(--green2));color:#06130a;margin-top:12px;font-size:15px;padding:13px;border:0;border-radius:14px;font-weight:800;cursor:pointer}
+.primary:active{transform:scale(.97)}
+.primary:disabled{opacity:.4;cursor:not-allowed}
+.work{font-size:16px;padding:16px;box-shadow:0 6px 20px #22c55e33}
+.adbtn{width:100%;margin-top:8px;background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;border:0;border-radius:12px;padding:10px;font-weight:800;font-size:13px;cursor:pointer}
+.adbtn:disabled{opacity:.45;cursor:not-allowed}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px;margin:8px 0}
+.section{font-size:15px;font-weight:900;margin:16px 2px 6px;display:flex;align-items:center;gap:6px;justify-content:space-between}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.job,.item{background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:12px;display:flex;flex-direction:column}
+.job .ico,.item .ico{font-size:26px;display:block;margin-bottom:4px}
+.job .grow,.item .grow{flex:1}
+button.action{width:100%;margin-top:8px;background:#e8eef5;color:#111;font-weight:800;padding:9px 6px;border:0;border-radius:10px;cursor:pointer;font-size:12.5px}
+button.action:active{transform:scale(.97)}
+button.action:disabled{opacity:.35;cursor:not-allowed}
+button.action.alt{background:#2a3645;color:#fff}
+button.action.gold{background:linear-gradient(135deg,#facc15,#f59e0b);color:#1a1200}
+.btnrow{display:flex;gap:6px}
+.btnrow button{flex:1}
+.bar{height:7px;background:#1e2834;border-radius:8px;overflow:hidden;margin-top:7px}
+.fill{height:100%;background:linear-gradient(90deg,var(--green),#a3e635);width:0;transition:width .3s;border-radius:8px}
+.fill.warn{background:linear-gradient(90deg,#f59e0b,#ef4444)}
+.fill.blue{background:linear-gradient(90deg,#60a5fa,#a78bfa)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.event{border-left:4px solid var(--yellow)}.stock{border-left:4px solid var(--blue)}.loan{border-left:4px solid var(--orange)}
+.rival{border-left:4px solid var(--red)}.holding{border-left:4px solid var(--purple)}.country{border-left:4px solid var(--pink)}
+.achieve{border-left:4px solid #a3e635}.quest{border-left:4px solid #38bdf8}.prestige{border-left:4px solid #e879f9}
+.panel{display:none}.panel.active{display:block;animation:fade .2s}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1}}
+.locked{opacity:.45}
+.save{background:#1e2a3a;color:#fff;margin-top:8px;width:100%;padding:12px;border:0;border-radius:12px;font-weight:700;cursor:pointer}
+.save.danger{background:#3a1e1e}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#fff;color:#111;padding:12px 18px;border-radius:14px;font-weight:800;display:none;z-index:120;box-shadow:0 8px 24px #0005;max-width:90vw;text-align:center}
+.toast.show{display:block;animation:pop .25s}
+.float-money{position:fixed;pointer-events:none;font-weight:900;font-size:18px;color:var(--green);z-index:90;animation:floatUp 1s ease-out forwards;text-shadow:0 2px 6px #000}
+@keyframes floatUp{to{opacity:0;transform:translateY(-70px)}}
+.particle{position:fixed;pointer-events:none;z-index:89;font-size:16px;animation:burst .8s ease-out forwards}
+@keyframes burst{to{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(180deg)}}
+.levelup{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:110;background:#0008;pointer-events:none}
+.levelup.show{display:flex}
+.levelup-box{background:#1a2e22;border:2px solid var(--green);border-radius:20px;padding:24px 32px;text-align:center;animation:pop .4s ease;box-shadow:0 0 40px #4ade8055;max-width:90vw}
+@keyframes pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+.avatar{width:78px;height:78px;border-radius:50%;display:grid;place-items:center;background:#243142;font-size:40px;margin:auto;border:3px solid var(--green)}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.stat-box{background:var(--card2);border-radius:12px;padding:10px;text-align:center}
+.stat-box b{display:block;font-size:16px;color:var(--green)}
+.stat-box span{font-size:11px;color:var(--muted)}
+.modal{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;z-index:100;padding:16px}
+.modal.open{display:flex}
+.modalbox{width:min(380px,100%);max-height:100%;overflow:auto;background:#111821;border:1px solid #303b49;border-radius:20px;padding:22px;text-align:center;animation:pop .25s}
+.modalbox .event-ico{font-size:52px;margin-bottom:8px}
+.modalbox h2{font-size:19px;margin-bottom:6px}
+.modalbox .desc{color:#c3ccd8;font-size:13.5px;margin-bottom:12px;line-height:1.45}
+.modalbox button{width:100%;padding:12px;border:0;border-radius:12px;font-weight:800;cursor:pointer;margin-top:6px}
+.modalbox input,.modalbox textarea{width:100%;padding:12px;border-radius:12px;border:1px solid #303b49;background:#0c1219;color:#fff;font-size:14px;margin:8px 0;user-select:text;-webkit-user-select:text}
+.modalbox textarea{height:120px;font-family:monospace;font-size:11px}
+.badge{display:inline-block;background:#4ade80;color:#06130a;font-size:10px;padding:2px 7px;border-radius:8px;font-weight:800}
+.seg{display:flex;background:#131a24;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.seg button{background:none;border:0;color:#b0bacc;font-weight:800;font-size:11px;padding:6px 10px;cursor:pointer}
+.seg button.on{background:var(--green);color:#06130a}
+.up{color:var(--green)}.down{color:var(--red)}
+.spark{display:block;width:100%;height:28px;margin-top:4px}
+.golden{position:fixed;z-index:95;font-size:44px;cursor:pointer;filter:drop-shadow(0 0 12px #facc15);animation:bob 1s ease-in-out infinite alternate, appear .3s;display:none;background:none;border:0}
+.golden.show{display:block}
+@keyframes bob{from{transform:translateY(0) rotate(-8deg)}to{transform:translateY(-10px) rotate(8deg)}}
+@keyframes appear{from{transform:scale(0)}}
+.log{font-size:12px;color:#c3ccd8;padding:4px 0;border-bottom:1px solid #1c2633}
+.log:last-child{border:0}
+.tag{font-size:10px;font-weight:800;padding:2px 6px;border-radius:6px;background:#243142;color:#cbd5e1}
+.kv{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px solid #1c2633}
+.kv:last-child{border:0}
+.kv span{color:var(--muted)}
+.hidden{display:none!important}
+@media(max-width:400px){.grid{grid-template-columns:1fr}.tabs button{font-size:10px;padding:8px 2px}.cash{font-size:28px}}
+@media(min-width:680px){.app{max-width:680px}.tabs{grid-template-columns:repeat(8,1fr)}.grid.wide3{grid-template-columns:1fr 1fr 1fr}}
+@media(max-height:560px){.top{display:none}.sticky{padding:2px 0 6px}.minibar{padding:4px 10px;margin-bottom:4px}.tabs button{padding:6px 2px}.hero{padding:12px 14px}.cash{font-size:26px}.work{padding:12px;margin-top:8px}.app{padding-top:4px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <div><h1 data-i18n="title">💰 1 TL'den Zenginliğe</h1><div class="muted" data-i18n="subtitle">İşsizden holding imparatoruna</div></div>
+    <span class="pill" id="rank"></span>
+  </div>
+
+  <div class="sticky">
+    <div class="minibar"><span>💵 <b id="mCash"></b></span><span class="muted" id="mInc"></span></div>
+    <nav class="tabs">
+      <button class="active" data-tab="home"><span data-i18n="tHome">🏠 Ana</span><i class="dot" id="dot-home"></i></button>
+      <button data-tab="jobs"><span data-i18n="tJobs">💼 İşler</span><i class="dot" id="dot-jobs"></i></button>
+      <button data-tab="biz"><span data-i18n="tBiz">🏪 İşletme</span><i class="dot" id="dot-biz"></i></button>
+      <button data-tab="life"><span data-i18n="tLife">🧍 Yaşam</span><i class="dot" id="dot-life"></i></button>
+      <button data-tab="bank"><span data-i18n="tBank">🏦 Banka</span><i class="dot" id="dot-bank"></i></button>
+      <button data-tab="stock"><span data-i18n="tStock">📈 Borsa</span><i class="dot" id="dot-stock"></i></button>
+      <button data-tab="holding"><span data-i18n="tHolding">👑 Holding</span><i class="dot" id="dot-holding"></i></button>
+      <button data-tab="more"><span data-i18n="tMore">⭐ Daha</span><i class="dot" id="dot-more"></i></button>
+    </nav>
+  </div>
+
+  <!-- HOME -->
+  <div id="home" class="panel active">
+    <div class="hero">
+      <div class="combo" id="combo"></div>
+      <div class="muted" data-i18n="balance">BAKİYE</div>
+      <div class="cash" id="cash"></div>
+      <div class="income" id="income"></div>
+      <div class="muted" id="prestigeInfo" style="margin-top:4px"></div>
+      <div class="chips" id="boosts"></div>
+      <button id="workBtn" class="primary work" data-act="work"></button>
+      <button id="adBoostBtn" class="adbtn hidden" data-act="adBoost"></button>
+    </div>
+    <div class="card">
+      <div class="row"><b data-i18n="nextGoal">🎯 Sıradaki Hedef</b><button class="pill" id="missionGo" data-act="tab" data-arg="biz" style="cursor:pointer" data-i18n="go">Git →</button></div>
+      <div style="margin-top:6px;font-size:14px" id="mission"></div>
+      <div class="bar"><div id="missionBar" class="fill"></div></div>
+    </div>
+    <div class="card">
+      <div class="row"><b data-i18n="netWorth">🏆 Net Değer</b><b id="net"></b></div>
+      <div class="muted" id="status"></div>
+    </div>
+    <div id="loginCard"></div>
+    <div class="section"><span data-i18n="dailyQuests">📅 Günlük Görevler</span><span class="badge" id="questBadge">0/3</span></div>
+    <div id="dailyQuests"></div>
+    <div class="section"><span data-i18n="eventLog">🗞️ Olay Günlüğü</span></div>
+    <div class="card event" id="eventLog"></div>
+    <div class="section"><span data-i18n="summary">📊 Özet</span></div>
+    <div class="stat-grid">
+      <div class="stat-box"><b id="sBiz">0</b><span data-i18n="sBiz">İşletme</span></div>
+      <div class="stat-box"><b id="sStaff">0</b><span data-i18n="sStaff">Çalışan</span></div>
+      <div class="stat-box"><b id="sRep">0</b><span data-i18n="sRep">İtibar</span></div>
+      <div class="stat-box"><b id="sPrestige">0</b><span data-i18n="sPrestige">Prestij</span></div>
+    </div>
+  </div>
+
+  <!-- JOBS -->
+  <div id="jobs" class="panel">
+    <div class="section"><span data-i18n="tJobs">💼 İşler</span></div>
+    <div class="card"><div class="muted" data-i18n="jobsInfo"></div></div>
+    <div class="grid wide3" id="jobsList"></div>
+  </div>
+
+  <!-- BIZ -->
+  <div id="biz" class="panel">
+    <div class="section"><span data-i18n="businesses">🏪 İşletmeler</span>
+      <div class="seg" id="buyMode"><button data-act="mode" data-arg="1">x1</button><button data-act="mode" data-arg="10">x10</button><button data-act="mode" data-arg="max">MAX</button></div>
+    </div>
+    <div class="muted" style="margin:0 2px 4px" data-i18n="milesInfo"></div>
+    <div id="bizList"></div>
+    <div class="section"><span data-i18n="staff">👥 Çalışanlar</span><span class="pill" id="staffCount">0 / 4</span></div>
+    <div class="card" style="padding:10px 14px"><div class="bar" style="margin:0"><div id="staffBar" class="fill"></div></div></div>
+    <div id="staffTypes"></div>
+    <div class="section"><span data-i18n="office">🏢 Ofis</span><span class="pill" id="officeLv">Lv.0</span></div>
+    <div class="card" id="officeCard"></div>
+  </div>
+
+  <!-- LIFE -->
+  <div id="life" class="panel">
+    <div class="section"><span data-i18n="character">🧍 Karakter</span></div>
+    <div class="card">
+      <div class="avatar" id="avatar">🧍</div>
+      <div style="text-align:center;margin-top:8px"><b id="charName" style="font-size:16px"></b></div>
+      <div class="muted" style="text-align:center" id="charSub"></div>
+      <div class="bar"><div id="xpBar" class="fill blue"></div></div>
+      <div class="muted small" style="text-align:center;margin-top:4px" id="xpTxt"></div>
+      <div class="stat-grid" id="charStats"></div>
+    </div>
+    <div class="section"><span data-i18n="shop">🛒 Market</span></div>
+    <div class="grid wide3" id="shopList"></div>
+    <div class="section"><span data-i18n="vehicles">🚗 Araçlar</span></div>
+    <div class="grid wide3" id="vehList"></div>
+    <div class="section"><span data-i18n="homes">🏠 Konutlar</span></div>
+    <div class="muted" style="margin:0 2px 4px" data-i18n="homesInfo"></div>
+    <div class="grid wide3" id="houseList"></div>
+  </div>
+
+  <!-- BANK -->
+  <div id="bank" class="panel">
+    <div class="section"><span data-i18n="tBank">🏦 Banka</span></div>
+    <div class="card">
+      <div class="row"><b data-i18n="availCredit">Kullanılabilir Kredi</b><b id="creditLimit"></b></div>
+      <div class="muted" id="loanInfo" style="margin-top:4px"></div>
+      <div class="btnrow" id="loanBtns"></div>
+    </div>
+    <div class="card loan">
+      <div class="row"><b data-i18n="curDebt">Mevcut Borç</b><b id="debt"></b></div>
+      <div class="muted" id="interestInfo"></div>
+      <div class="row muted small" style="margin-top:6px"><span data-i18n="debtRatio">Borç oranı</span><span id="ratioTxt"></span></div>
+      <div class="bar" style="margin:4px 0 6px"><div id="debtBar" class="fill warn"></div></div>
+      <div class="muted" id="debtPenaltyInfo"></div>
+      <div class="btnrow"><button class="action" data-act="repay" data-arg="part" data-i18n="repay25">💰 %25 Öde</button><button class="action alt" data-act="repay" data-arg="all" data-i18n="repayAll">Tümünü Öde</button></div>
+    </div>
+    <div class="card">
+      <b data-i18n="loanRules">📜 Kredi Kuralları</b>
+      <div class="muted" style="margin-top:6px;line-height:1.5" data-i18n="loanRulesTxt"></div>
+    </div>
+    <div class="section"><span data-i18n="rivals">⚔️ Rakipler</span></div>
+    <div class="muted" style="margin:0 2px 4px" data-i18n="rivalsInfo"></div>
+    <div id="rivals"></div>
+  </div>
+
+  <!-- STOCK -->
+  <div id="stock" class="panel">
+    <div class="section"><span data-i18n="tStock">📈 Borsa</span></div>
+    <div class="card" id="portfolio"></div>
+    <div id="stockList"></div>
+  </div>
+
+  <!-- HOLDING -->
+  <div id="holding" class="panel">
+    <div class="section"><span data-i18n="tHolding">👑 Holding</span></div>
+    <div class="card holding">
+      <div class="row">
+        <b id="holdingName" style="font-size:16px"></b>
+        <button data-act="rename" style="width:auto;padding:6px 12px;background:#2a3645;color:#fff;border:0;border-radius:10px;font-size:11px;font-weight:700;cursor:pointer" data-i18n="rename">✏️ İsim</button>
+      </div>
+      <div style="font-size:24px;font-weight:900;margin:8px 0" id="holdingValue"></div>
+      <div class="row"><span class="pill" id="holdingRank"></span><span class="muted" id="holdingBonus"></span></div>
+    </div>
+    <div id="holdingList"></div>
+    <div class="section"><span data-i18n="markets">🌍 Uluslararası Pazarlar</span></div>
+    <div class="muted" style="margin:0 2px 4px" data-i18n="marketsInfo"></div>
+    <div id="countriesList"></div>
+  </div>
+
+  <!-- MORE -->
+  <div id="more" class="panel">
+    <div class="section"><span data-i18n="prestige">♻️ Prestij</span></div>
+    <div class="card prestige">
+      <div class="row"><b data-i18n="prestigeLevel">Prestij Seviyesi</b><b id="prestigeLv">0</b></div>
+      <div class="muted" style="margin:6px 0" data-i18n="prestigeInfo"></div>
+      <div class="row muted"><span data-i18n="prestigeNeed">Gereken net değer</span><b id="prestigeNeed"></b></div>
+      <div class="bar"><div id="prestigeBar" class="fill"></div></div>
+      <button id="prestigeBtn" class="primary" data-act="prestige" disabled></button>
+      <div class="muted" style="margin-top:6px" id="prestigeBonus"></div>
+    </div>
+    <div class="section"><span data-i18n="achievements">🏅 Başarımlar</span><span class="badge" id="achieveBadge">0</span></div>
+    <div id="achieveList"></div>
+    <div class="section"><span data-i18n="stats">📊 İstatistikler</span></div>
+    <div class="card" id="statsCard"></div>
+    <div class="section"><span data-i18n="settings">⚙️ Ayarlar</span></div>
+    <div class="card">
+      <button class="save" data-act="sound" id="soundBtn"></button>
+      <button class="save" data-act="lang" id="langBtn"></button>
+      <button class="save" data-act="save" data-i18n="saveNow">💾 Şimdi Kaydet</button>
+      <div class="btnrow"><button class="save" data-act="export" data-i18n="export">📤 Dışa Aktar</button><button class="save" data-act="import" data-i18n="import">📥 İçe Aktar</button></div>
+      <button class="save danger" data-act="reset" data-i18n="reset">🗑️ Oyunu Sıfırla</button>
+      <div class="muted small" style="margin-top:8px;text-align:center" data-i18n="autosave"></div>
+    </div>
+  </div>
+</div>
+
+<button class="golden" id="golden" data-act="golden" aria-label="bonus">💰</button>
+<div id="toast" class="toast"></div>
+<div class="levelup" id="levelup"><div class="levelup-box"><div style="font-size:42px" id="levelupIco">🚀</div><div style="font-size:20px;font-weight:900;margin-top:6px" id="levelupText"></div><div class="muted" id="levelupSub"></div></div></div>
+
+<div class="modal" id="modal">
+  <div class="modalbox">
+    <div class="event-ico" id="mIco"></div>
+    <h2 id="mTitle"></h2>
+    <div class="desc" id="mDesc"></div>
+    <div id="mBtns"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+const KEY = "zenginlik_v9";
+const $ = id => document.getElementById(id);
+const clamp = (v,a=0,b=1) => Math.max(a, Math.min(b, v));
+const pick = a => a[Math.floor(Math.random()*a.length)];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+// ================= LANGUAGE =================
+let LANG = "tr";
+const L = (tr, en) => LANG === "tr" ? tr : en;
+const pct = n => LANG === "tr" ? "%"+n : n+"%";
+function detectLang(sdkLocale){
+  let pref = null; try{ pref = localStorage.getItem("zenginlik_lang"); }catch(e){}
+  if(pref === "tr" || pref === "en") return pref;
+  const loc = (sdkLocale || navigator.language || "en").toLowerCase();
+  return loc.startsWith("tr") ? "tr" : "en";
+}
+const STATIC = {
+  title:["💰 1 TL'den Zenginliğe","💰 $1 to Billionaire"],
+  subtitle:["İşsizden holding imparatoruna","From jobless to empire tycoon"],
+  tHome:["🏠 Ana","🏠 Home"], tJobs:["💼 İşler","💼 Jobs"], tBiz:["🏪 İşletme","🏪 Business"], tLife:["🧍 Yaşam","🧍 Life"],
+  tBank:["🏦 Banka","🏦 Bank"], tStock:["📈 Borsa","📈 Stocks"], tHolding:["👑 Holding","👑 Empire"], tMore:["⭐ Daha","⭐ More"],
+  balance:["BAKİYE","BALANCE"], nextGoal:["🎯 Sıradaki Hedef","🎯 Next Goal"], go:["Git →","Go →"], netWorth:["🏆 Net Değer","🏆 Net Worth"],
+  dailyQuests:["📅 Günlük Görevler","📅 Daily Quests"], eventLog:["🗞️ Olay Günlüğü","🗞️ Event Log"], summary:["📊 Özet","📊 Summary"],
+  sBiz:["İşletme","Businesses"], sStaff:["Çalışan","Staff"], sRep:["İtibar","Reputation"], sPrestige:["Prestij","Prestige"],
+  jobsInfo:["Her iş tıklaması iş ücretine ek olarak saniyelik gelirinin <b>%5</b>'ini de verir. Hızlı tıklamak <b>kombo</b> (en fazla ×2) oluşturur. Ana sayfadaki Çalış butonu açık olan en iyi işi yapar.",
+            "Every job click also pays <b>5%</b> of your income per second. Clicking fast builds a <b>combo</b> (up to ×2). The Work button on Home always does your best unlocked job."],
+  businesses:["🏪 İşletmeler","🏪 Businesses"],
+  milesInfo:["Seviye 10, 25, 50, 100… kilometre taşlarında işletme geliri <b>×2</b> olur.","At levels 10, 25, 50, 100… a business's income <b>doubles</b>."],
+  staff:["👥 Çalışanlar","👥 Staff"], office:["🏢 Ofis","🏢 Office"], character:["🧍 Karakter","🧍 Character"],
+  shop:["🛒 Market","🛒 Shop"], vehicles:["🚗 Araçlar","🚗 Vehicles"], homes:["🏠 Konutlar","🏠 Homes"],
+  homesInfo:["En iyi konutun offline kazanç süresini ve verimini belirler.","Your best home sets offline earning time and efficiency."],
+  availCredit:["Kullanılabilir Kredi","Available Credit"], curDebt:["Mevcut Borç","Current Debt"], debtRatio:["Borç oranı","Debt ratio"],
+  repay25:["💰 %25 Öde","💰 Repay 25%"], repayAll:["Tümünü Öde","Repay All"], loanRules:["📜 Kredi Kuralları","📜 Loan Rules"],
+  loanRulesTxt:["• Limit gelirine, net değerine, itibarına ve takım elbisene bağlı.<br>• Tek seferde limitin en fazla %40'ı alınır.<br>• Faiz her 30 sn işler; borç oranı arttıkça yükselir.<br>• Borç oranı %40+ → gelir cezası, %60+ → yeni kredi kilitli, %75+ → itibar kaybı, %90+ → nakitten otomatik kesinti.",
+                "• Your limit depends on income, net worth, reputation and your suit.<br>• You can borrow at most 40% of the limit at once.<br>• Interest is charged every 30 s and rises with your debt ratio.<br>• Debt ratio 40%+ → income penalty, 60%+ → new loans locked, 75%+ → reputation loss, 90%+ → automatic deductions from cash."],
+  rivals:["⚔️ Rakipler","⚔️ Rivals"],
+  rivalsInfo:["Her ortaklık kalıcı <b>+%4 gelir</b> ve <b>+6 itibar</b> verir (en fazla 5).","Each partnership gives a permanent <b>+4% income</b> and <b>+6 reputation</b> (max 5)."],
+  rename:["✏️ İsim","✏️ Name"], markets:["🌍 Uluslararası Pazarlar","🌍 Global Markets"],
+  marketsInfo:["Pazar açmak için Lojistik işletmesi ve yeterli itibar gerekir.","Opening a market requires the Logistics business and enough reputation."],
+  prestige:["♻️ Prestij","♻️ Prestige"], prestigeLevel:["Prestij Seviyesi","Prestige Level"],
+  prestigeInfo:["İlerleme sıfırlanır; her prestij kalıcı <b>+%12 gelir</b> ve başlangıç sermayesi verir. Başarımlar, istatistikler ve holding ismi korunur.",
+                "Progress resets; each prestige grants a permanent <b>+12% income</b> and starting capital. Achievements, stats and your empire name are kept."],
+  prestigeNeed:["Gereken net değer","Required net worth"], achievements:["🏅 Başarımlar","🏅 Achievements"], stats:["📊 İstatistikler","📊 Statistics"],
+  settings:["⚙️ Ayarlar","⚙️ Settings"], saveNow:["💾 Şimdi Kaydet","💾 Save Now"], export:["📤 Dışa Aktar","📤 Export"], import:["📥 İçe Aktar","📥 Import"],
+  reset:["🗑️ Oyunu Sıfırla","🗑️ Reset Game"], autosave:["Oyun otomatik olarak kaydedilir.","The game saves automatically."]
+};
+function applyStatic(){
+  document.documentElement.lang = LANG;
+  document.title = L("1 TL'den Zenginliğe","$1 to Billionaire");
+  document.querySelectorAll("[data-i18n]").forEach(el=>{ const v = STATIC[el.dataset.i18n]; if(v) el.innerHTML = L(v[0], v[1]); });
+}
+
+// ================= CRAZYGAMES SDK WRAPPER =================
+let paused = false, gameplayOn = false;
+const CG = {
+  sdk:null, env:"none", ready:false, mute:false, adPlaying:false,
+  async init(){
+    const s = window.CrazyGames && window.CrazyGames.SDK;
+    if(!s) return;
+    try{
+      await Promise.race([s.init(), new Promise((_,rej)=>setTimeout(()=>rej(new Error("timeout")), 6000))]);
+      this.sdk = s; this.env = s.environment;
+      this.ready = this.env === "crazygames" || this.env === "local";
+      if(this.ready){
+        try{ this.mute = !!s.game.settings.muteAudio; s.game.addSettingsChangeListener(st=>{ this.mute = !!st.muteAudio; }); }catch(e){}
+      }
+    }catch(e){ console.warn("CrazyGames SDK init failed", e); }
+  },
+  locale(){ try{ return this.ready ? this.sdk.user.systemInfo.locale : null; }catch(e){ return null; } },
+  safe(fn){ if(!this.ready) return; try{ fn(this.sdk); }catch(e){ console.warn(e); } },
+  loadingStart(){ this.safe(s=>s.game.loadingStart()); },
+  loadingStop(){ this.safe(s=>s.game.loadingStop()); },
+  gameplayStart(){ if(gameplayOn) return; gameplayOn = true; this.safe(s=>s.game.gameplayStart()); },
+  gameplayStop(){ if(!gameplayOn) return; gameplayOn = false; this.safe(s=>s.game.gameplayStop()); },
+  happy(){ this.safe(s=>s.game.happytime()); },
+  // type: "rewarded" | "midgame"
+  ad(type, onDone, onFail){
+    if(!this.ready || this.adPlaying){ onFail && onFail("unavailable"); return; }
+    let started = false;
+    const finish = ok => {
+      this.adPlaying = false; paused = false; lastTick = performance.now();
+      this.gameplayStart();
+      ok ? (onDone && onDone()) : (onFail && onFail());
+    };
+    try{
+      this.sdk.ad.requestAd(type, {
+        adStarted:()=>{ started = true; this.adPlaying = true; paused = true; this.gameplayStop(); },
+        adFinished:()=>finish(true),
+        adError:(err)=>{ console.warn("ad error", err); finish(false); }
+      });
+    }catch(e){ finish(false); }
+  }
+};
+function adsEnabled(){ return CG.ready; }
+
+// Storage: CrazyGames Data module when available, otherwise localStorage
+const store = {
+  get(k){
+    if(CG.ready && CG.sdk.data){ try{ const v = CG.sdk.data.getItem(k); if(v !== undefined) return v; }catch(e){} }
+    try{ return localStorage.getItem(k); }catch(e){ return null; }
+  },
+  set(k, v){
+    if(CG.ready && CG.sdk.data){ try{ CG.sdk.data.setItem(k, v); return true; }catch(e){} }
+    try{ localStorage.setItem(k, v); return true; }catch(e){ return false; }
+  }
+};
+
+// ================= CONTENT (built after language is known) =================
+let BIZ, STAFF, OFFICES, ITEMS, VEHICLES, HOUSES, COMPANIES, COUNTRIES, RIVALS, JOBS, TITLES, ACHIEVEMENTS, QT, EVENTS, MISSIONS;
+const G = 1.18, MILES = [10,25,50,100,150,200,300,400,500];
+const LEMON = {base:10, g:1.32, inc:0.45, max:60};
+const ITEM_MAX = 5, ITEM_G = 6, SH_G = 1.04, DIV = 0.002;
+
+function defineContent(){
+  BIZ = [
+    {ico:"🏪", name:L("Bakkal","Corner Shop"),          base:25,    inc:0.65},
+    {ico:"🍔", name:L("Fast Food","Fast Food"),         base:650,   inc:5.5},
+    {ico:"☕", name:L("Kafe","Café"),                   base:8500,  inc:40},
+    {ico:"🏨", name:L("Otel","Hotel"),                  base:1.2e5, inc:520},
+    {ico:"🏭", name:L("Fabrika","Factory"),             base:1.8e6, inc:7200},
+    {ico:"🚚", name:L("Lojistik","Logistics"),          base:2.8e7, inc:95000},
+    {ico:"🏢", name:L("Holding Merkezi","Holding HQ"),  base:4.5e8, inc:1.5e6}
+  ];
+  STAFF = [
+    {key:"normal",  ico:"👤", name:L("Çalışan","Worker"),        base:800,  desc:L("+%5 gelir","+5% income"),                                   req:()=>S.biz[0]>0, rt:L("Bakkal gerekli","Requires Corner Shop")},
+    {key:"manager", ico:"👔", name:L("Yönetici","Manager"),      base:3500, desc:L("Tüm gelir ×1.08 (çarpımsal)","All income ×1.08 (stacks)"),  req:()=>S.biz[1]>0, rt:L("Fast Food gerekli","Requires Fast Food")},
+    {key:"marketer",ico:"📣", name:L("Pazarlamacı","Marketer"),  base:2800, desc:L("Olay şansı +%3, iyi olaylar ↑","+3% event chance, more good events"), req:()=>S.biz[2]>0, rt:L("Kafe gerekli","Requires Café")},
+    {key:"finance", ico:"💼", name:L("Finansçı","Financier"),    base:4200, desc:L("Hisseler %3 ucuz","Stocks 3% cheaper"),                   req:()=>S.biz[2]>0, rt:L("Kafe gerekli","Requires Café")}
+  ];
+  OFFICES = [
+    {name:L("Ofis Yok","No Office"),     cost:0,     cap:4,   bonus:0},
+    {name:L("Ev Ofisi","Home Office"),   cost:2.5e4, cap:8,   bonus:0.02},
+    {name:L("Küçük Ofis","Small Office"),cost:6e5,   cap:15,  bonus:0.05},
+    {name:L("Büyük Ofis","Large Office"),cost:2.5e7, cap:30,  bonus:0.09},
+    {name:L("Plaza Katı","Tower Floor"), cost:8e8,   cap:60,  bonus:0.14},
+    {name:L("Gökdelen","Skyscraper"),    cost:3e10,  cap:120, bonus:0.20}
+  ];
+  ITEMS = [
+    {id:"coffee",   ico:"☕", name:L("Kahve Makinesi","Coffee Machine"), base:150,   desc:L("İş +%5 / sv","Work +5% / lv"),     rep:1},
+    {id:"phone",    ico:"📱", name:L("Telefon","Phone"),                 base:4200,  desc:L("İş +%8 / sv","Work +8% / lv"),     rep:2},
+    {id:"watch",    ico:"⌚", name:L("Saat","Watch"),                    base:7800,  desc:L("Hisse −%2 / sv","Stocks −2% / lv"), rep:3},
+    {id:"suit",     ico:"🤵", name:L("Takım Elbise","Suit"),             base:15000, desc:L("Kredi +%8 / sv","Credit +8% / lv"), rep:4},
+    {id:"laptop",   ico:"💻", name:"Laptop",                             base:22000, desc:L("İş +%15 / sv","Work +15% / lv"),   rep:3},
+    {id:"furniture",ico:"🪑", name:L("Mobilya","Furniture"),             base:48000, desc:L("Gelir +%3 / sv","Income +3% / lv"), rep:5}
+  ];
+  VEHICLES = [
+    {id:"bike",  ico:"🚲", name:L("Bisiklet","Bicycle"),       cost:900,    rep:2,   work:0.05, inc:0},
+    {id:"car",   ico:"🚗", name:L("Araba","Car"),              cost:1.1e5,  rep:10,  work:0.10, inc:0},
+    {id:"suv",   ico:"🚙", name:"SUV",                         cost:1.2e6,  rep:28,  work:0,    inc:0.02},
+    {id:"sport", ico:"🏎️", name:L("Spor Araba","Sports Car"),  cost:8.5e6,  rep:65,  work:0,    inc:0.04},
+    {id:"jet",   ico:"🛩️", name:L("Özel Jet","Private Jet"),   cost:2.5e9,  rep:200, work:0,    inc:0.08},
+    {id:"yacht", ico:"🛥️", name:L("Mega Yat","Mega Yacht"),    cost:9e10,   rep:400, work:0,    inc:0.12}
+  ];
+  HOUSES = [
+    {id:"flat",   ico:"🏚️", name:L("Kiralık Daire","Rented Flat"), cost:3000,  rep:3,   offH:3,  offE:0.28},
+    {id:"house",  ico:"🏠", name:L("Ev","House"),                  cost:8.5e5, rep:18,  offH:5,  offE:0.32},
+    {id:"villa",  ico:"🏡", name:"Villa",                          cost:9e6,   rep:55,  offH:8,  offE:0.36},
+    {id:"lux",    ico:"🏰", name:L("Lüks Villa","Luxury Villa"),   cost:9.5e7, rep:140, offH:10, offE:0.40},
+    {id:"manor",  ico:"🏯", name:L("Malikane","Mansion"),          cost:5e9,   rep:260, offH:12, offE:0.45},
+    {id:"island", ico:"🏝️", name:L("Özel Ada","Private Island"),   cost:2e11,  rep:500, offH:16, offE:0.50}
+  ];
+  COMPANIES = [
+    {ico:"📱", name:"Pixelon",     p:2.5e5},
+    {ico:"💾", name:"Nimbusoft",   p:2e6},
+    {ico:"🍔", name:"Burgerado",   p:1.2e7},
+    {ico:"🎮", name:"PlayForge",   p:6e7},
+    {ico:"🔎", name:"Seekly",      p:3e8},
+    {ico:"✈️", name:"Aerovia",     p:1e9},
+    {ico:"🏦", name:"Vaultis Bank",p:4e9},
+    {ico:"📦", name:"Boxora",      p:1.5e10},
+    {ico:"🛢️", name:"Petronix",    p:5e10},
+    {ico:"⚡", name:"Voltara",     p:2e11}
+  ];
+  COUNTRIES = [
+    {flag:"🇹🇷", name:"Türkiye",             cost:5e7,   income:8000,   rep:30},
+    {flag:"🇩🇪", name:L("Almanya","Germany"),cost:2.5e8, income:28000,  rep:60},
+    {flag:"🇯🇵", name:L("Japonya","Japan"),  cost:6e8,   income:52000,  rep:100},
+    {flag:"🇺🇸", name:L("Amerika","USA"),    cost:8e8,   income:75000,  rep:150},
+    {flag:"🇨🇳", name:L("Çin","China"),      cost:1.2e9, income:110000, rep:220}
+  ];
+  RIVALS = [
+    {ico:"🔴", name:"MegaCorp",         cost:3.8e5},
+    {ico:"🟣", name:"Nova Group",       cost:7.5e6},
+    {ico:"🟠", name:"Titan Industries", cost:1.6e8}
+  ];
+  JOBS = [
+    {ico:"⚡", name:L("Gündelik İş","Odd Job"),                  pay:1,      req:()=>true,                                rt:""},
+    {ico:"📦", name:L("Kutu Taşı","Carry Boxes"),                pay:2.5,    req:()=>S.totalEarned>=8,                    rt:L(cur()+"8 kazan","Earn "+cur()+"8")},
+    {ico:"🍋", name:L("Limonata Sat","Sell Lemonade"),           pay:5,      req:()=>S.lemon>=1,                          rt:L("Limonata standı kur","Build a lemonade stand")},
+    {ico:"🛒", name:L("Bakkal Siparişi","Shop Deliveries"),      pay:12,     req:()=>S.biz[0]>=1,                         rt:L("Bakkal aç","Open the Corner Shop")},
+    {ico:"🛵", name:L("Kurye","Courier"),                        pay:35,     req:()=>S.biz[1]>=1 && !!S.veh.bike,         rt:L("Fast Food + Bisiklet","Fast Food + Bicycle")},
+    {ico:"🚕", name:L("Taksi","Taxi Driver"),                    pay:90,     req:()=>!!S.veh.car,                         rt:L("Araba al","Buy a Car")},
+    {ico:"🧑‍💻", name:L("Yazılım","Coding"),                     pay:160,    req:()=>S.biz[2]>=1 && itemLv("laptop")>0,   rt:L("Kafe + Laptop","Café + Laptop")},
+    {ico:"📊", name:L("Danışmanlık","Consulting"),               pay:450,    req:()=>S.biz[3]>=1 && itemLv("suit")>0,     rt:L("Otel + Takım Elbise","Hotel + Suit")},
+    {ico:"⚙️", name:L("Mühendislik","Engineering"),              pay:1500,   req:()=>S.biz[4]>=1,                         rt:L("Fabrika aç","Open the Factory")},
+    {ico:"🗺️", name:L("Lojistik Müdürü","Logistics Manager"),    pay:6000,   req:()=>S.biz[5]>=1,                         rt:L("Lojistik aç","Open Logistics")},
+    {ico:"🏦", name:L("Yatırım Bankacılığı","Investment Banking"),pay:25000, req:()=>controlled()>=1,                     rt:L("1 şirketi kontrol et","Control 1 company")},
+    {ico:"🏛️", name:L("Yönetim Kurulu","Board Member"),          pay:120000, req:()=>S.biz[6]>=1,                         rt:L("Holding Merkezi aç","Open Holding HQ")}
+  ];
+  TITLES = [[23,L("Holding İmparatoru","Empire Tycoon"),"👑"],[19,"CEO","🕴️"],[15,L("Patron","Boss"),"💼"],[11,L("Şirket Sahibi","Company Owner"),"🏢"],[7,L("İşletmeci","Shop Owner"),"🏪"],[3,L("Girişimci","Entrepreneur"),"🧑‍💼"],[1,L("İşsiz","Jobless"),"🧍"]];
+  ACHIEVEMENTS = [
+    {id:"m10",     ico:"🪙", name:L("İlk Adım","First Step"),         desc:L(cur()+"10 kazan","Earn "+cur()+"10"),          check:()=>S.totalEarned>=10},
+    {id:"lemon",   ico:"🍋", name:L("Limonata","Lemonade"),           desc:L("Stand kur","Build a stand"),                check:()=>S.lemon>=1},
+    {id:"bakkal",  ico:"🏪", name:L("Esnaf","Shopkeeper"),            desc:L("Bakkal aç","Open the Corner Shop"),          check:()=>S.biz[0]>=1},
+    {id:"m1k",     ico:"💵", name:L("Cep Harçlığı","Pocket Money"),   desc:L(fmt(1e3)+" kazan","Earn "+fmt(1e3)),          check:()=>S.totalEarned>=1e3},
+    {id:"staff",   ico:"👤", name:L("İşveren","Employer"),            desc:L("1 çalışan al","Hire 1 worker"),              check:()=>totalStaff()>=1},
+    {id:"mgr",     ico:"👔", name:L("Yönetim","Management"),          desc:L("1 yönetici al","Hire 1 manager"),            check:()=>S.staff.manager>=1},
+    {id:"office",  ico:"🏢", name:L("Ofisli","Office Life"),          desc:L("Ofis edin","Get an office"),                 check:()=>S.office>=1},
+    {id:"m1m",     ico:"💰", name:L("Milyoner","Millionaire"),        desc:L(fmt(1e6)+" kazan","Earn "+fmt(1e6)),          check:()=>S.totalEarned>=1e6},
+    {id:"biz25",   ico:"📈", name:L("Uzmanlaşma","Specialist"),       desc:L("Bir işletme Lv.25","A business at Lv.25"),  check:()=>S.biz.some(l=>l>=25)},
+    {id:"allbiz",  ico:"🏙️", name:L("Zincir","Chain"),                desc:L("Tüm işletmeleri aç","Open all businesses"),  check:()=>S.biz.every(l=>l>=1)},
+    {id:"share",   ico:"📊", name:L("Yatırımcı","Investor"),          desc:L("1 hisse al","Buy 1 share"),                  check:()=>S.shares.some(x=>x>0)},
+    {id:"ctrl",    ico:"🎩", name:L("Patron","The Boss"),             desc:L("Bir şirkette %51","51% of a company"),       check:()=>controlled()>=1},
+    {id:"ctrl3",   ico:"🏛️", name:L("Konglomera","Conglomerate"),     desc:L("3 şirketi kontrol et","Control 3 companies"),check:()=>controlled()>=3},
+    {id:"ctrl10",  ico:"🌐", name:L("Tekel","Monopoly"),              desc:L("10 şirketi kontrol et","Control 10 companies"),check:()=>controlled()>=10},
+    {id:"country", ico:"✈️", name:L("Küresel","Global"),              desc:L("Bir ülke pazarı aç","Open a country market"),check:()=>S.countries.some(x=>x>0)},
+    {id:"allc",    ico:"🌍", name:L("Dünya Markası","World Brand"),   desc:L("Tüm pazarları aç","Open every market"),      check:()=>S.countries.every(x=>x>0)},
+    {id:"m1b",     ico:"💎", name:L("Milyarder","Billionaire"),       desc:L(fmt(1e9)+" kazan","Earn "+fmt(1e9)),          check:()=>S.totalEarned>=1e9},
+    {id:"m1t",     ico:"🚀", name:L("Trilyoner","Trillionaire"),      desc:L(fmt(1e12)+" kazan","Earn "+fmt(1e12)),        check:()=>S.totalEarned>=1e12},
+    {id:"car",     ico:"🚗", name:L("Direksiyon","Behind the Wheel"), desc:L("Araba al","Buy a car"),                      check:()=>!!S.veh.car},
+    {id:"house",   ico:"🏠", name:L("Ev Sahibi","Homeowner"),         desc:L("Ev al","Buy a house"),                       check:()=>!!S.house.house},
+    {id:"rival",   ico:"🤝", name:L("Diplomat","Diplomat"),           desc:L("Rakiple anlaş","Make a rival deal"),         check:()=>S.rivals.some(x=>x>0)},
+    {id:"debtfree",ico:"🧾", name:L("Borçsuz","Debt Free"),           desc:L("Krediyi tamamen kapat","Fully repay a loan"),check:()=>S.stats.repaid>=1},
+    {id:"golden",  ico:"✨", name:L("Fırsatçı","Opportunist"),        desc:L("10 fırsat çantası yakala","Catch 10 money bags"), check:()=>S.stats.golden>=10},
+    {id:"quests",  ico:"📅", name:L("Disiplinli","Disciplined"),      desc:L("10 günlük görev tamamla","Complete 10 daily quests"), check:()=>S.stats.quests>=10},
+    {id:"work100", ico:"💪", name:L("Çalışkan","Hard Worker"),        desc:L("100 kez çalış","Work 100 times"),            check:()=>S.stats.works>=100},
+    {id:"work1k",  ico:"🦾", name:L("İşkolik","Workaholic"),          desc:L("1.000 kez çalış","Work 1,000 times"),        check:()=>S.stats.works>=1000},
+    {id:"prest",   ico:"♻️", name:L("Yeniden Doğuş","Reborn"),        desc:L("1 prestij","Prestige once"),                 check:()=>S.prestige>=1},
+    {id:"prest5",  ico:"🌟", name:L("Efsane","Legend"),               desc:L("5 prestij","Prestige 5 times"),              check:()=>S.prestige>=5}
+  ];
+  QT = [
+    {type:"work",   mk:()=>pick([20,40,60]),                                  d:t=>L(`${t} kez çalış`,`Work ${t} times`)},
+    {type:"earn",   mk:()=>Math.max(200, Math.round(calcIncome(false)*300)),  d:t=>L(`${fmt(t)} kazan`,`Earn ${fmt(t)}`)},
+    {type:"biz",    mk:()=>pick([3,5,10]),                                    d:t=>L(`${t} işletme seviyesi yükselt`,`Upgrade businesses ${t} levels`)},
+    {type:"staff",  mk:()=>pick([1,2]),  req:()=>S.biz[0]>0,                  d:t=>L(`${t} çalışan al`,`Hire ${t} staff`)},
+    {type:"share",  mk:()=>pick([1,3,5]),req:()=>S.biz[3]>0,                  d:t=>L(`%${t} hisse al`,`Buy ${t}% of shares`)},
+    {type:"golden", mk:()=>pick([1,2]),                                       d:t=>L(`${t} fırsat çantası yakala`,`Catch ${t} money bag(s)`)},
+    {type:"event",  mk:()=>2,                                                 d:t=>L(`${t} olay yaşa`,`Experience ${t} events`)},
+    {type:"buy",    mk:()=>1,                                                 d:t=>L(`Yaşam'dan bir şey satın al`,`Buy something in Life`)},
+    {type:"combo",  mk:()=>pick([20,30]),                                     d:t=>L(`${t} kombo yap`,`Reach a ${t} combo`)}
+  ];
+  EVENTS = buildEvents();
+  MISSIONS = [
+    {t:L(cur()+"10 biriktir, limonata standı kur","Save "+cur()+"10 and build a lemonade stand"), tab:"biz", done:()=>S.lemon>=1, p:()=>S.cash/lemonCost()},
+    {t:L("Bakkal aç","Open the Corner Shop")+" ("+fmt(25)+")", tab:"biz", done:()=>S.biz[0]>=1, p:()=>S.cash/25},
+    {t:L("Kahve makinesi al","Buy a Coffee Machine"), tab:"life", done:()=>itemLv("coffee")>=1, p:()=>S.cash/150},
+    {t:L("Fast Food aç","Open Fast Food"), tab:"biz", done:()=>S.biz[1]>=1, p:()=>S.cash/BIZ[1].base},
+    {t:L("Bisiklet al (Kurye işi açılır)","Buy a Bicycle (unlocks Courier)"), tab:"life", done:()=>!!S.veh.bike, p:()=>S.cash/900},
+    {t:L("İlk çalışanını al","Hire your first worker"), tab:"biz", done:()=>totalStaff()>=1, p:()=>S.cash/800},
+    {t:L("Kafe aç","Open the Café"), tab:"biz", done:()=>S.biz[2]>=1, p:()=>S.cash/BIZ[2].base},
+    {t:L("Bakkal'ı Lv.10'a çıkar (gelir ×2)","Get the Corner Shop to Lv.10 (income ×2)"), tab:"biz", done:()=>S.biz[0]>=10, p:()=>S.biz[0]/10},
+    {t:L("Ev Ofisi al (kapasite 8)","Get a Home Office (capacity 8)"), tab:"biz", done:()=>S.office>=1, p:()=>S.cash/OFFICES[1].cost},
+    {t:L("Otel aç","Open the Hotel"), tab:"biz", done:()=>S.biz[3]>=1, p:()=>S.cash/BIZ[3].base},
+    {t:L("İlk hisseni al (Pixelon)","Buy your first share (Pixelon)"), tab:"stock", done:()=>S.shares.some(x=>x>0), p:()=>S.cash/sharePrice(0)},
+    {t:L("Araba al (Taksi işi açılır)","Buy a Car (unlocks Taxi)"), tab:"life", done:()=>!!S.veh.car, p:()=>S.cash/VEHICLES[1].cost},
+    {t:L("Rakip ile ilk anlaşmayı yap","Make your first rival deal"), tab:"bank", done:()=>S.rivals.some(x=>x>0), p:()=>S.cash/rivalCost(0)},
+    {t:L("Fabrika aç","Open the Factory"), tab:"biz", done:()=>S.biz[4]>=1, p:()=>S.cash/BIZ[4].base},
+    {t:L("Pixelon'da %51 kontrol","Take 51% control of Pixelon"), tab:"stock", done:()=>controlled()>=1, p:()=>S.shares[0]/51},
+    {t:L("Lojistik aç","Open Logistics"), tab:"biz", done:()=>S.biz[5]>=1, p:()=>S.cash/BIZ[5].base},
+    {t:L("🇹🇷 Türkiye pazarını aç","Open the 🇹🇷 Türkiye market"), tab:"holding", done:()=>S.countries[0]>=1, p:()=>Math.min(S.cash/COUNTRIES[0].cost, S.reputation/COUNTRIES[0].rep)},
+    {t:L("Prestij yap (kalıcı +%12)","Prestige (permanent +12%)"), tab:"more", done:()=>S.prestige>=1, p:()=>netWorth()/prestigeNeed()},
+    {t:L("Holding Merkezi aç","Open Holding HQ"), tab:"biz", done:()=>S.biz[6]>=1, p:()=>S.cash/BIZ[6].base},
+    {t:L("3 şirketi kontrol et","Control 3 companies"), tab:"stock", done:()=>controlled()>=3, p:()=>controlled()/3},
+    {t:L("Tüm ülke pazarlarını aç","Open every country market"), tab:"holding", done:()=>S.countries.every(x=>x>0), p:()=>S.countries.filter(x=>x>0).length/5},
+    {t:L(fmt(1e12)+" net değere ulaş","Reach "+fmt(1e12)+" net worth"), tab:"home", done:()=>netWorth()>=1e12, p:()=>netWorth()/1e12},
+    {t:L("10 şirketin tamamını kontrol et","Control all 10 companies"), tab:"stock", done:()=>controlled()>=10, p:()=>controlled()/10},
+    {t:L("Dünyanın en zengini ol: "+fmt(1e15)+" net değer","Become the richest: "+fmt(1e15)+" net worth"), tab:"home", done:()=>netWorth()>=1e15, p:()=>netWorth()/1e15}
+  ];
+}
+
+// ================= STATE =================
+function fresh(){
+  return {
+    v:9, cash:1, totalEarned:1, lifetime:1, debt:0, reputation:0, office:0,
+    holdingName:"",
+    biz:[0,0,0,0,0,0,0], lemon:0,
+    staff:{normal:0,manager:0,marketer:0,finance:0},
+    items:{}, veh:{}, house:{},
+    shares:Array(10).fill(0), mkt:Array(10).fill(1), hist:Array.from({length:10},()=>Array(24).fill(1)),
+    countries:[0,0,0,0,0], rivals:[0,0,0],
+    prestige:0, achievements:{},
+    daily:{date:"", quests:[]}, login:{last:"", streak:0},
+    stats:{works:0, golden:0, events:0, quests:0, loans:0, repaid:0, playTime:0, maxIncome:0, prestiges:0, ads:0},
+    boosts:[], buyMode:"1", settings:{sound:true}, log:[], adBoostAt:0,
+    lastTime:Date.now(), lastLv:1
+  };
+}
+function merge(d, x){
+  for(const k in d){
+    if(x[k] === undefined || x[k] === null) continue;
+    if(Array.isArray(d[k])) d[k] = Array.isArray(x[k]) ? (k==="boosts"||k==="log" ? x[k] : d[k].map((v,i)=> x[k][i]!==undefined ? x[k][i] : v)) : d[k];
+    else if(typeof d[k] === "object") d[k] = Object.assign(d[k], x[k]);
+    else d[k] = x[k];
+  }
+  return d;
+}
+function load(){
+  let x = null;
+  try{ const raw = store.get(KEY); if(raw) x = typeof raw === "string" ? JSON.parse(raw) : raw; }catch(e){}
+  if(x && x.v === 9) return merge(fresh(), x);
+  return fresh();
+}
+let S = fresh();
+let booted = false;
+function persist(){ if(!booted) return false; S.lastTime = Date.now(); return store.set(KEY, JSON.stringify(S)); }
+
+// ================= AUDIO =================
+let actx = null;
+function ensureAudio(){ try{ if(!actx) actx = new (window.AudioContext||window.webkitAudioContext)(); if(actx.state==="suspended") actx.resume(); }catch(e){} }
+function tone(f,d,t="square",v=0.05){
+  if(!S.settings.sound || CG.mute || CG.adPlaying) return;
+  try{ ensureAudio(); if(!actx) return;
+    const o=actx.createOscillator(), g=actx.createGain();
+    o.type=t; o.frequency.value=f; g.gain.setValueAtTime(v, actx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001, actx.currentTime+d);
+    o.connect(g); g.connect(actx.destination); o.start(); o.stop(actx.currentTime+d+0.02);
+  }catch(e){}
+}
+const sfx = {
+  click:()=>tone(420,0.04),
+  money:()=>{ tone(660,0.06,"sine"); setTimeout(()=>tone(880,0.08,"sine"),45); },
+  buy:()=>{ tone(440,0.06); setTimeout(()=>tone(660,0.08),60); },
+  level:()=>{ tone(520,0.1,"sine"); setTimeout(()=>tone(780,0.12,"sine"),80); setTimeout(()=>tone(1040,0.16,"sine"),160); },
+  event:()=>{ tone(300,0.12,"triangle",0.08); setTimeout(()=>tone(450,0.12,"triangle",0.08),110); },
+  bad:()=>{ tone(220,0.18,"sawtooth",0.05); setTimeout(()=>tone(160,0.22,"sawtooth",0.05),150); },
+  err:()=>tone(160,0.12,"sawtooth",0.04),
+  gold:()=>{ [880,1100,1320,1760].forEach((f,i)=>setTimeout(()=>tone(f,0.08,"sine",0.05),i*55)); }
+};
+
+// ================= FORMAT / FX =================
+const cur = () => LANG==="tr" ? "₺" : "$";
+function num(n){
+  n = Number(n) || 0; const neg = n < 0; n = Math.abs(n); let s;
+  const units = LANG==="tr" ? [[1e18,"Kn"],[1e15,"Ka"],[1e12,"T"],[1e9,"Mr"],[1e6,"Mn"]] : [[1e18,"Qi"],[1e15,"Qa"],[1e12,"T"],[1e9,"B"],[1e6,"M"]];
+  const loc = LANG==="tr" ? "tr-TR" : "en-US";
+  if(n >= 1e21) s = n.toExponential(2);
+  else { const u = units.find(u => n >= u[0]);
+    if(u) s = (n/u[0]).toLocaleString(loc,{minimumFractionDigits:2,maximumFractionDigits:2}) + " " + u[1];
+    else if(n >= 1000) s = Math.floor(n).toLocaleString(loc);
+    else s = n.toLocaleString(loc,{minimumFractionDigits:2,maximumFractionDigits:2}); }
+  return (neg?"-":"") + s;
+}
+const fmt = n => cur() + num(n);
+const int = n => Math.floor(n).toLocaleString(LANG==="tr"?"tr-TR":"en-US");
+function fmtTime(sec){ sec = Math.floor(sec); const h=Math.floor(sec/3600), m=Math.floor(sec%3600/60), s=sec%60; return h? `${h}${L("sa","h")} ${m}${L("dk","m")}` : m? `${m}${L("dk","m")} ${s}${L("sn","s")}` : `${s}${L("sn","s")}`; }
+const perSec = () => L("/sn","/s");
+function toast(msg){ const el=$("toast"); el.textContent=msg; el.classList.remove("show"); void el.offsetWidth; el.classList.add("show"); clearTimeout(toast.t); toast.t=setTimeout(()=>el.classList.remove("show"),1700); }
+function floatMoney(amount, x, y, color){
+  const el = document.createElement("div"); el.className="float-money";
+  el.textContent = (amount>=0?"+":"") + fmt(amount);
+  if(color) el.style.color = color;
+  el.style.left = ((x||innerWidth/2) - 30 + (Math.random()*30-15)) + "px";
+  el.style.top = (y||innerHeight/2) + "px";
+  document.body.appendChild(el); setTimeout(()=>el.remove(), 1000);
+}
+function particles(x, y, ch="💵", n=6){
+  for(let i=0;i<n;i++){ const p=document.createElement("div"); p.className="particle"; p.textContent=ch;
+    const a=Math.random()*Math.PI*2, d=40+Math.random()*50;
+    p.style.left=x+"px"; p.style.top=y+"px"; p.style.setProperty("--dx",Math.cos(a)*d+"px"); p.style.setProperty("--dy",Math.sin(a)*d-20+"px");
+    document.body.appendChild(p); setTimeout(()=>p.remove(),800); }
+}
+function showLevelUp(text, sub="", ico="🚀"){
+  $("levelupIco").textContent = ico; $("levelupText").textContent = text; $("levelupSub").textContent = sub;
+  $("levelup").classList.add("show"); sfx.level();
+  clearTimeout(showLevelUp.t); showLevelUp.t = setTimeout(()=>$("levelup").classList.remove("show"), 1400);
+}
+function addLog(txt){ S.log.unshift({t:Date.now(), txt}); S.log = S.log.slice(0,6); renderLog(); }
+
+// ================= MODAL =================
+const mq = []; let modalOpen = false;
+function openModal(o){
+  if(modalOpen){ mq.push(o); return; }
+  modalOpen = true;
+  $("mIco").textContent = o.ico || "";
+  $("mTitle").textContent = o.title || "";
+  $("mDesc").innerHTML = o.html || esc(o.text || "");
+  const box = $("mBtns"); box.innerHTML = "";
+  (o.buttons || [{label:L("Tamam","OK")}]).forEach(b=>{
+    if(b.ad && !adsEnabled()) return;
+    const el = document.createElement("button");
+    el.className = b.cls || "primary"; el.textContent = b.label;
+    el.onclick = ()=>{ sfx.click(); let keep = false; if(b.fn) keep = b.fn() === false; if(!keep) closeModal(); };
+    box.appendChild(el);
+  });
+  $("modal").classList.add("open");
+}
+function closeModal(){ $("modal").classList.remove("open"); modalOpen = false; if(mq.length) setTimeout(()=>openModal(mq.shift()), 220); }
+function confirmBox(ico, title, text, yes, fn){ openModal({ico, title, text, buttons:[{label:yes, fn}, {label:L("Vazgeç","Cancel"), cls:"save"}]}); }
+
+// ================= REWARDED / MIDGAME ADS =================
+const AD_BOOST_CD = 4*60*1000, AD_BOOST_DUR = 180, MIDGAME_GAP = 4*60*1000;
+let lastMidgame = Date.now();
+function rewarded(onReward){
+  if(!adsEnabled()){ toast(L("Reklam şu an kullanılamıyor","Ads are unavailable right now")); return; }
+  CG.ad("rewarded", ()=>{ S.stats.ads++; lastMidgame = Date.now(); onReward(); persist(); },
+    ()=>{ toast(L("Reklam yüklenemedi, sonra tekrar dene","No ad available, try again later")); });
+}
+function maybeMidgame(){
+  if(!adsEnabled() || modalOpen) return;
+  if(Date.now() - lastMidgame < MIDGAME_GAP) return;
+  lastMidgame = Date.now();
+  CG.ad("midgame");
+}
+function adBoost(){
+  if(Date.now() - S.adBoostAt < AD_BOOST_CD) return;
+  rewarded(()=>{ S.adBoostAt = Date.now(); addBoost(2, AD_BOOST_DUR, L("📺 Reklam ×2","📺 Ad ×2")); showLevelUp(L("GELİR ×2","INCOME ×2"), L("3 dakika boyunca","for 3 minutes"), "📺"); afterAction(); });
+}
+
+// ================= CORE FORMULAS =================
+const totalStaff = () => S.staff.normal + S.staff.manager + S.staff.marketer + S.staff.finance;
+const ownedBiz = () => S.biz.filter(l=>l>0).length;
+const controlled = () => S.shares.filter(x=>x>=51).length;
+const itemLv = id => S.items[id] | 0;
+const holdingName = () => S.holdingName || L("Benim Holdingim","My Empire");
+function lvl(){ return Math.max(1, Math.floor(2*Math.log10(Math.max(1,S.totalEarned))) + 1); }
+function title(l=lvl()){ return TITLES.find(t => l >= t[0]); }
+function prestigeMult(){ return 1 + S.prestige*0.12; }
+function milestoneMult(lv, list=MILES){ let m=1; for(const t of list) if(lv>=t) m*=2; return m; }
+function nextMilestone(lv, list=MILES){ return list.find(t => t > lv); }
+
+function bizCostN(i, n){ const b=BIZ[i], lv=S.biz[i]; return b.base*Math.pow(G,lv)*(Math.pow(G,n)-1)/(G-1); }
+function bizMaxN(i){ const b=BIZ[i], lv=S.biz[i]; const n = Math.floor(Math.log(S.cash*(G-1)/(b.base*Math.pow(G,lv)) + 1)/Math.log(G)); return Math.max(0, n); }
+function bizIncome(i, lv=S.biz[i]){ return lv>0 ? BIZ[i].inc*lv*milestoneMult(lv) : 0; }
+function bizUnlocked(i){ return i===0 || S.biz[i-1] > 0; }
+function lemonCost(){ return LEMON.base*Math.pow(LEMON.g, S.lemon); }
+function lemonIncome(lv=S.lemon){ return lv>0 ? LEMON.inc*lv*milestoneMult(lv,[10,25,50]) : 0; }
+
+function shareDiscount(){ return Math.min(0.45, S.staff.finance*0.03 + itemLv("watch")*0.02); }
+function sharePrice(i, owned=S.shares[i]){ return COMPANIES[i].p*Math.pow(SH_G, owned)*S.mkt[i]*(1-shareDiscount()); }
+function shareSell(i){ return COMPANIES[i].p*Math.pow(SH_G, S.shares[i]-1)*S.mkt[i]*0.95; }
+function dividend(i){ const sh=S.shares[i]; return sh*COMPANIES[i].p*DIV*(sh>=51?2:1); }
+function totalDividends(){ let d=0; for(let i=0;i<10;i++) d+=dividend(i); return d; }
+function countryCost(i){ return COUNTRIES[i].cost*Math.pow(1.8, S.countries[i]); }
+function countryIncome(i, lv=S.countries[i]){ return COUNTRIES[i].income*lv*(lv>=5?2:1); }
+function rivalCost(i){ return RIVALS[i].cost*Math.pow(2, S.rivals[i]); }
+
+function boostMult(){ const now=Date.now(); let m=1; S.boosts = S.boosts.filter(b=>b.until>now); S.boosts.forEach(b=>m*=b.mult); return clamp(m, 0.25, 30); }
+function addBoost(mult, sec, label){ S.boosts.push({mult, until:Date.now()+sec*1000, label}); }
+
+function workMult(){
+  let m = 1 + (lvl()-1)*0.03 + itemLv("coffee")*0.05 + itemLv("phone")*0.08 + itemLv("laptop")*0.15;
+  VEHICLES.forEach(v=>{ if(S.veh[v.id]) m += v.work; });
+  return m * prestigeMult();
+}
+function addBonus(){
+  let a = S.staff.normal*0.05 + OFFICES[S.office].bonus + itemLv("furniture")*0.03
+        + S.rivals.reduce((s,v)=>s+v,0)*0.04 + controlled()*0.05 + Math.min(0.5, S.reputation*0.0005);
+  VEHICLES.forEach(v=>{ if(S.veh[v.id]) a += v.inc; });
+  return a;
+}
+function incomeMult(withBoost=true){ return (1+addBonus()) * Math.pow(1.08, S.staff.manager) * prestigeMult() * (withBoost?boostMult():1); }
+function baseIncome(){
+  let b = lemonIncome();
+  for(let i=0;i<BIZ.length;i++) b += bizIncome(i);
+  for(let i=0;i<COUNTRIES.length;i++) b += countryIncome(i);
+  b += totalDividends();
+  return b;
+}
+function incomeRaw(withBoost=true){ return baseIncome()*incomeMult(withBoost); }
+function calcIncome(withBoost=true){ return incomeRaw(withBoost)*debtPenalty(); }
+
+function assets(){
+  let w = S.cash;
+  if(S.lemon) w += LEMON.base*(Math.pow(LEMON.g,S.lemon)-1)/(LEMON.g-1)*0.5;
+  BIZ.forEach((b,i)=>{ if(S.biz[i]) w += b.base*(Math.pow(G,S.biz[i])-1)/(G-1)*0.5; });
+  COMPANIES.forEach((c,i)=>{ const sh=S.shares[i]; if(sh) w += c.p*S.mkt[i]*(Math.pow(SH_G,sh)-1)/(SH_G-1)*0.9; });
+  COUNTRIES.forEach((c,i)=>{ const l=S.countries[i]; if(l) w += c.cost*(Math.pow(1.8,l)-1)/0.8*0.6; });
+  for(let o=1;o<=S.office;o++) w += OFFICES[o].cost*0.5;
+  VEHICLES.forEach(v=>{ if(S.veh[v.id]) w += v.cost*0.4; });
+  HOUSES.forEach(h=>{ if(S.house[h.id]) w += h.cost*0.6; });
+  return Math.max(0, w);
+}
+function netWorth(){ return assets() - S.debt; }
+function debtRatio(){ return S.debt>0 ? S.debt/Math.max(1, assets()) : 0; }
+function interestRate(){ return 0.008 + Math.min(1.2, debtRatio())*0.022; }
+function debtPenalty(){
+  const r = debtRatio();
+  if(r < 0.4) return 1;
+  if(r < 0.7) return 1 - (r-0.4)*0.5;
+  if(r < 1.0) return 0.85 - (r-0.7)*0.5;
+  return Math.max(0.4, 0.7 - (r-1)*0.3);
+}
+function creditLimit(){
+  let lim = Math.max(500, incomeRaw(false)*120 + Math.max(0,netWorth())*0.25);
+  lim *= 1 + Math.min(0.5, S.reputation*0.001);
+  lim *= 1 + itemLv("suit")*0.08;
+  const r = debtRatio(); if(r > 0.3) lim *= Math.max(0.1, 1-(r-0.3)*1.2);
+  return lim;
+}
+function creditAvail(){ return Math.max(0, Math.floor(creditLimit() - S.debt)); }
+function creditLocked(){ return debtRatio() > 0.6; }
+function offlineCaps(){ let h=2, e=0.25; HOUSES.forEach(x=>{ if(S.house[x.id]){ h=Math.max(h,x.offH); e=Math.max(e,x.offE);} }); return {h,e}; }
+function prestigeNeed(){ return 1e8*Math.pow(4, S.prestige); }
+
+// ================= DAILY =================
+function dayStr(d=new Date()){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function yesterday(){ const d=new Date(); d.setDate(d.getDate()-1); return dayStr(d); }
+function refreshDaily(){
+  if(S.daily.date === dayStr() && S.daily.quests.length === 3) return;
+  const pool = QT.filter(q=>!q.req || q.req()).sort(()=>Math.random()-0.5).slice(0,3);
+  S.daily = {date:dayStr(), quests: pool.map(q=>({type:q.type, t:q.mk(), p:0, c:false}))};
+  if(booted) renderQuests();
+}
+function track(type, amt=1){
+  refreshDaily();
+  S.daily.quests.forEach(q=>{ if(!q.c && q.type===type){ q.p = type==="combo" ? Math.max(q.p, amt) : Math.min(q.t, q.p+amt); } });
+}
+function questDesc(q){ const t = QT.find(x=>x.type===q.type); return t ? t.d(q.t) : q.type; }
+function questReward(i){ return Math.max(60*(i+1), calcIncome(false)*180 + 80*(i+1)) * (1+S.prestige*0.1); }
+
+// ================= ACTIONS =================
+let combo = 0, lastClick = 0;
+function bestJob(){ let b = JOBS[0]; JOBS.forEach(j=>{ if(j.req() && j.pay>b.pay) b=j; }); return b; }
+function workGain(job){ return job.pay*workMult()*(1+combo*0.02) + calcIncome()*0.05; }
+function earn(v){ S.cash += v; S.totalEarned += v; S.lifetime += v; }
+function doWork(job, el){
+  const now = Date.now();
+  combo = now-lastClick < 800 ? Math.min(50, combo+1) : 0;
+  lastClick = now;
+  const gain = workGain(job);
+  earn(gain); S.stats.works++;
+  track("work"); track("earn", gain); track("combo", combo);
+  sfx.money();
+  if(el){ const r = el.getBoundingClientRect(); const x=r.left+r.width/2, y=r.top; floatMoney(gain, x, y); if(combo>=10 && combo%5===0) particles(x, y+20, "💵", 5); }
+  else floatMoney(gain);
+  afterAction(false);
+}
+function spend(c){ if(S.cash + 1e-9 < c){ sfx.err(); toast(L("Yeterli paran yok","Not enough money")+" ("+fmt(c)+")"); return false; } S.cash -= c; return true; }
+
+function buyLemon(){
+  if(S.lemon >= LEMON.max){ toast(L("Maksimum seviye","Max level")); return; }
+  if(!spend(lemonCost())) return;
+  S.lemon++; sfx.buy(); track("biz");
+  if(S.lemon===1) showLevelUp(L("Limonata Standı!","Lemonade Stand!"), L("İlk pasif gelirin başladı","Your first passive income!"), "🍋");
+  else if([10,25,50].includes(S.lemon)) showLevelUp(L("Limonata","Lemonade")+" Lv."+S.lemon, L("Gelir ×2!","Income ×2!"), "🍋");
+  afterAction();
+}
+function buyBiz(i){
+  i = +i; if(!bizUnlocked(i)){ sfx.err(); toast(L("Önce önceki işletmeyi aç","Open the previous business first")); return; }
+  const n = S.buyMode==="max" ? Math.max(1,bizMaxN(i)) : +S.buyMode;
+  if(!spend(bizCostN(i, n))) return;
+  const before = S.biz[i]; S.biz[i] += n; track("biz", n);
+  sfx.buy();
+  const crossed = MILES.find(t => before < t && S.biz[i] >= t);
+  if(before===0){ showLevelUp(BIZ[i].name+L(" Açıldı!"," Opened!"), "+"+fmt(bizIncome(i)*incomeMult())+perSec(), BIZ[i].ico); if(i>=2) setTimeout(maybeMidgame, 1600); }
+  else if(crossed) showLevelUp(BIZ[i].name+" Lv."+crossed, L("Kilometre taşı: gelir ×2!","Milestone: income ×2!"), BIZ[i].ico);
+  else toast(BIZ[i].ico+" "+BIZ[i].name+" Lv."+S.biz[i]);
+  afterAction();
+}
+function staffCost(t){ return t.base*Math.pow(1.45, S.staff[t.key]); }
+function hire(key){
+  const t = STAFF.find(x=>x.key===key); if(!t) return;
+  if(!t.req()){ sfx.err(); toast(t.rt); return; }
+  if(totalStaff() >= OFFICES[S.office].cap){ sfx.err(); toast(L("Kapasite dolu — ofisi büyüt","Capacity full — upgrade your office")); return; }
+  if(!spend(staffCost(t))) return;
+  S.staff[key]++; track("staff"); sfx.buy(); toast(t.ico+" "+t.name+L(" işe alındı"," hired"));
+  afterAction();
+}
+function buyOffice(){
+  const nx = OFFICES[S.office+1]; if(!nx) return;
+  if(!spend(nx.cost)) return;
+  S.office++; showLevelUp(nx.name, L("Kapasite ","Capacity ")+nx.cap+" • "+L("Gelir ","Income ")+"+"+pct(Math.round(nx.bonus*100)), "🏢");
+  afterAction();
+}
+function buyItem(id){
+  const it = ITEMS.find(x=>x.id===id); const lv = itemLv(id);
+  if(lv >= ITEM_MAX) return;
+  if(!spend(it.base*Math.pow(ITEM_G, lv))) return;
+  S.items[id] = lv+1; S.reputation += it.rep; track("buy"); sfx.buy(); toast(it.ico+" "+it.name+" Lv."+(lv+1));
+  afterAction();
+}
+function buyOwned(list, storeObj, id){
+  const x = list.find(v=>v.id===id); if(!x || storeObj[id]) return;
+  if(!spend(x.cost)) return;
+  storeObj[id] = 1; S.reputation += x.rep; track("buy");
+  showLevelUp(x.name+L(" senin!"," is yours!"), L("İtibar +","Reputation +")+x.rep, x.ico);
+  afterAction();
+}
+function buyShares(i, n){
+  let bought = 0, spent = 0;
+  for(let k=0;k<n;k++){
+    if(S.shares[i] >= 100) break;
+    const p = sharePrice(i); if(S.cash < p) break;
+    S.cash -= p; spent += p; S.shares[i]++; bought++;
+    if(S.shares[i] === 51){
+      showLevelUp(COMPANIES[i].name+L(" senin!"," is yours!"), L("Holdinge katıldı • Temettü ×2 • Gelir +%5","Joined your empire • Dividends ×2 • Income +5%"), "👑");
+      addLog("👑 "+COMPANIES[i].name+L(" kontrolü ele geçirildi"," taken over")); CG.happy();
+    }
+  }
+  if(!bought){ sfx.err(); toast(S.shares[i]>=100 ? L("Şirketin tamamı sende","You own the whole company") : L("Yeterli paran yok","Not enough money")); return; }
+  track("share", bought); sfx.buy();
+  if(S.shares[i] !== 51) toast(COMPANIES[i].ico+" "+pct(bought)+L(" alındı"," bought")+" ("+fmt(spent)+")");
+  afterAction();
+}
+function sellShare(i){
+  i = +i; if(S.shares[i] <= 0) return;
+  const doSell = ()=>{ const v = shareSell(i); S.shares[i]--; S.cash += v; sfx.money(); toast(COMPANIES[i].name+" "+pct(1)+L(" satıldı +"," sold +")+fmt(v)); afterAction(); };
+  if(S.shares[i] === 51) confirmBox("⚠️", L("Kontrolü kaybedeceksin","You'll lose control"), L(COMPANIES[i].name+" %50'ye düşerse holdingden çıkar. Satılsın mı?", "At 50% "+COMPANIES[i].name+" leaves your empire. Sell anyway?"), L("Sat","Sell"), doSell);
+  else doSell();
+}
+function buyCountry(i){
+  i = +i; const c = COUNTRIES[i];
+  if(!S.biz[5]){ sfx.err(); toast(L("Lojistik işletmesi gerekli","Requires Logistics")); return; }
+  if(S.reputation < c.rep){ sfx.err(); toast(L("İtibar gerekli: ","Reputation needed: ")+c.rep); return; }
+  if(!spend(countryCost(i))) return;
+  S.countries[i]++; S.reputation += 15;
+  showLevelUp(c.flag+" "+c.name, S.countries[i]===1 ? L("Pazar açıldı!","Market opened!") : L("Pazar","Market")+" Lv."+S.countries[i], c.flag);
+  addLog(c.flag+" "+c.name+" Lv."+S.countries[i]);
+  afterAction();
+}
+function rivalDeal(i){
+  i = +i; if(S.rivals[i] >= 5) return;
+  if(!spend(rivalCost(i))) return;
+  S.rivals[i]++; S.reputation += 6; sfx.buy();
+  toast("🤝 "+RIVALS[i].name+" ("+S.rivals[i]+"/5)"); addLog("🤝 "+RIVALS[i].name+L(" ortaklığı"," partnership"));
+  afterAction();
+}
+function takeLoan(p){
+  if(creditLocked()){ sfx.err(); toast(L("Borç oranın yüksek — kredi kilitli","Debt ratio too high — loans locked")); return; }
+  const amt = Math.floor(creditAvail()*p);
+  if(amt < 100){ sfx.err(); toast(L("Kredi limitin doldu","Credit limit reached")); return; }
+  S.cash += amt; S.debt += amt; S.stats.loans++; sfx.money();
+  toast(fmt(amt)+L(" kredi alındı • Faiz "," borrowed • Interest ")+pct((interestRate()*100).toFixed(2)));
+  afterAction();
+}
+function repay(all){
+  if(S.debt <= 0){ toast(L("Borcun yok","No debt")); return; }
+  const amt = all ? Math.min(S.debt, S.cash) : Math.min(S.cash, Math.max(S.debt*0.25, Math.min(100, S.debt)), S.debt);
+  if(amt <= 0){ sfx.err(); toast(L("Ödeyecek nakit yok","No cash to repay")); return; }
+  S.cash -= amt; S.debt -= amt;
+  if(S.debt < 0.01){ S.debt = 0; S.stats.repaid++; S.reputation += 3; showLevelUp(L("Borç Kapandı!","Debt Cleared!"), L("İtibar +3","Reputation +3"), "🧾"); }
+  else { sfx.click(); toast(fmt(amt)+L(" ödendi"," repaid")); }
+  afterAction();
+}
+function claimQuest(i){
+  refreshDaily(); const q = S.daily.quests[i];
+  if(!q || q.c || q.p < q.t) return;
+  q.c = true; const r = questReward(i);
+  earn(r); S.reputation += 2; S.stats.quests++;
+  sfx.money(); toast(L("Görev ödülü +","Quest reward +")+fmt(r));
+  if(S.daily.quests.every(x=>x.c)){ addBoost(1.5, 120, L("Görev Ustası","Quest Master")); showLevelUp(L("Tüm görevler bitti!","All quests done!"), L("2 dk boyunca gelir ×1.5","Income ×1.5 for 2 min"), "📅"); }
+  afterAction();
+}
+function loginReward(){ const st = S.login.last===yesterday() ? S.login.streak+1 : 1; return {st, r:(100 + calcIncome(false)*240)*Math.min(7, st)}; }
+function claimLogin(double){
+  if(S.login.last === dayStr()) return;
+  const give = ()=>{
+    if(S.login.last === dayStr()) return;
+    const {st, r} = loginReward(); const v = r*(double?2:1);
+    S.login = {last:dayStr(), streak:st};
+    earn(v); S.reputation += 1;
+    showLevelUp(L("Günlük Bonus","Daily Bonus"), st+L(". gün serisi • +"," day streak • +")+fmt(v), "🎁");
+    afterAction();
+  };
+  double ? rewarded(give) : give();
+}
+function doPrestige(){
+  if(netWorth() < prestigeNeed()){ toast(L("Yetersiz net değer","Net worth too low")); return; }
+  const np = S.prestige+1;
+  confirmBox("♻️", L("Prestij ","Prestige ")+np,
+    L(`Tüm işletmeler, hisseler, nakit ve borç sıfırlanır. Kalıcı olarak +%${np*12} gelir ve ${fmt(500*np*np)} başlangıç sermayesi kazanırsın.`,
+      `All businesses, shares, cash and debt reset. You get a permanent +${np*12}% income and ${fmt(500*np*np)} starting capital.`),
+    L("Prestij Yap","Prestige"), ()=>{
+    const keep = {prestige:np, achievements:S.achievements, holdingName:S.holdingName, stats:S.stats, settings:S.settings, login:S.login, lifetime:S.lifetime, daily:S.daily, log:S.log, mkt:S.mkt, hist:S.hist, adBoostAt:S.adBoostAt};
+    S = Object.assign(fresh(), keep);
+    S.cash = 500*np*np; S.totalEarned = S.cash; S.stats.prestiges++;
+    S.lastLv = lvl();
+    addLog("♻️ "+L("Prestij ","Prestige ")+np);
+    CG.happy();
+    setTimeout(()=>showLevelUp(L("PRESTİJ ","PRESTIGE ")+np, L("Kalıcı +%"+(np*12)+" gelir","Permanent +"+(np*12)+"% income"), "♻️"), 250);
+    afterAction(); persist();
+    setTimeout(()=>{ lastMidgame = 0; maybeMidgame(); }, 1800);
+  });
+}
+
+// ================= EVENTS =================
+function gift(sec){ const g = Math.max(25, calcIncome(false)*sec); earn(g); return g; }
+function tax(p){ const t = Math.min(S.cash*p, Math.max(25, calcIncome(false)*90)); S.cash = Math.max(0, S.cash-t); return t; }
+function buildEvents(){ return [
+  {w:3, good:1, ico:"📈", title:L("Talep Patlaması","Demand Boom"), run:()=>{ addBoost(1.4,25,L("Talep +%40","Demand +40%")); return L("Müşteriler kapıda kuyruk oldu! 25 sn boyunca gelir <b>+%40</b>.","Customers are lining up! Income <b>+40%</b> for 25 s."); }},
+  {w:2, good:1, ico:"🎁", title:L("Büyük Müşteri","Big Client"), run:()=>{ addBoost(2,15,L("Büyük Müşteri ×2","Big Client ×2")); return L("Dev bir sipariş geldi. 15 sn boyunca gelir <b>×2</b>!","A huge order arrived. Income <b>×2</b> for 15 s!"); }},
+  {w:3, good:1, ico:"🎉", title:L("Sürpriz Ödeme","Surprise Payment"), gift:40, run:()=>L("Eski bir alacağın tahsil edildi: <b>+","An old debt was paid back to you: <b>+")+fmt(gift(40))+"</b>"},
+  {w:2, good:1, ico:"⭐", title:L("Medya Haberi","In the News"), run:()=>{ S.reputation+=5; return L("Gazetede başarı hikâyen çıktı. <b>İtibar +5</b>","Your success story made the news. <b>Reputation +5</b>"); }},
+  {w:2, good:1, ico:"📢", title:L("Viral Reklam","Viral Ad"), run:()=>{ addBoost(1.6,20,L("Viral +%60","Viral +60%")); S.reputation+=2; return L("Reklamın sosyal medyada patladı! 20 sn <b>+%60</b> gelir, itibar +2.","Your ad went viral! <b>+60%</b> income for 20 s, reputation +2."); }},
+  {w:1, good:1, ico:"🤝", title:L("Devlet Teşviki","Government Grant"), gift:120, run:()=>L("Yatırım teşviki kazandın: <b>+","You received an investment grant: <b>+")+fmt(gift(120))+"</b>"},
+  {w:1, good:1, ico:"🚀", title:L("Piyasa Coşkusu","Market Rally"), run:()=>{ addBoost(1.5,20,L("Coşku +%50","Rally +50%")); S.mkt=S.mkt.map(m=>Math.min(2.2,m*1.08)); return L("Borsa yükselişte! Hisseler %8 değerlendi, 20 sn gelir <b>+%50</b>.","Stocks are rallying! Shares +8%, income <b>+50%</b> for 20 s."); }},
+  {w:2, good:0, ico:"🚨", title:L("Fiyat Savaşı","Price War"), run:()=>{ addBoost(0.7,15,L("Fiyat Savaşı −%30","Price War −30%")); return L("Rakipler fiyat kırdı. 15 sn boyunca gelir <b>−%30</b>.","Rivals slashed prices. Income <b>−30%</b> for 15 s."); }},
+  {w:2, good:0, ico:"🧾", title:L("Vergi Dönemi","Tax Season"), run:()=>L("Vergi ödendi: <b>−","Taxes paid: <b>−")+fmt(tax(0.06))+"</b>"},
+  {w:1, good:0, ico:"🔥", title:L("Yangın","Fire"), run:()=>{ const t=tax(0.12); addBoost(0.8,15,L("Onarım −%20","Repairs −20%")); return L("Depoda yangın çıktı! Onarım: <b>−","A fire broke out in the warehouse! Repairs: <b>−")+fmt(t)+"</b>"; }},
+  {w:1, good:0, ico:"📉", title:L("Durgunluk","Recession"), run:()=>{ addBoost(0.75,25,L("Durgunluk −%25","Recession −25%")); return L("Ekonomi yavaşladı. 25 sn boyunca gelir <b>−%25</b>.","The economy slowed down. Income <b>−25%</b> for 25 s."); }},
+  {w:1, good:0, ico:"💥", title:L("Borsa Çöküşü","Market Crash"), req:()=>S.shares.some(x=>x>0), run:()=>{ S.mkt=S.mkt.map(m=>Math.max(0.5,m*0.8)); return L("Borsada panik! Tüm hisseler <b>%20</b> değer kaybetti. Ucuzdan almak için fırsat olabilir…","Panic on the market! All stocks lost <b>20%</b>. Could be a chance to buy cheap…"); }},
+  {w:2, good:1, choice:true, ico:"💼", title:L("Yatırım Teklifi","Investment Offer"), req:()=>calcIncome()>1, run:()=>{
+    const c = Math.max(50, calcIncome(false)*60);
+    return {html:L(`Genç bir girişim senden <b>${fmt(c)}</b> yatırım istiyor. Başarılı olursa paranın <b>3 katı</b> döner (şans %55).`,`A young startup asks you for <b>${fmt(c)}</b>. If it succeeds you get <b>3×</b> back (55% chance).`),
+      buttons:[{label:L("Yatır","Invest")+" ("+fmt(c)+")", fn:()=>{ if(S.cash<c){ toast(L("Yeterli nakit yok","Not enough cash")); return; } S.cash-=c;
+        if(Math.random()<0.55){ const w=c*3; earn(w); sfx.gold(); addLog("💼 +"+fmt(w)); toast(L("Girişim uçtu! +","The startup took off! +")+fmt(w)); }
+        else { sfx.bad(); addLog("💼 −"+fmt(c)); toast(L("Girişim battı… −","The startup failed… −")+fmt(c)); } afterAction(); }},
+        {label:L("Reddet","Decline"), cls:"save"}]};
+  }},
+  {w:2, good:0, choice:true, ico:"⚔️", title:L("Rakip Saldırısı","Rival Attack"), req:()=>calcIncome()>1, run:()=>{
+    const r = pick(RIVALS), c = Math.max(40, calcIncome(false)*30);
+    return {html:L(`${r.ico} <b>${r.name}</b> agresif bir kampanya başlattı. Karşılık verecek misin?`,`${r.ico} <b>${r.name}</b> launched an aggressive campaign. Will you strike back?`),
+      buttons:[{label:L("Karşı kampanya","Counter campaign")+" ("+fmt(c)+")", fn:()=>{ if(S.cash<c){ toast(L("Yeterli nakit yok","Not enough cash")); return; } S.cash-=c; addBoost(1.35,40,L("Karşı Atak +%35","Counter +35%")); addLog("⚔️ "+r.name); afterAction(); }},
+        {label:L("Görmezden gel","Ignore it"), cls:"save", fn:()=>{ addBoost(0.8,30,r.name+" −"+pct(20)); afterAction(); }}]};
+  }},
+  {w:1, good:1, choice:true, ico:"🏗️", title:L("Franchise Talebi","Franchise Request"), req:()=>ownedBiz()>=2, run:()=>{
+    const g = Math.max(80, calcIncome(false)*90);
+    return {html:L(`Bir girişimci markanın franchise'ını istiyor. Peşin <b>${fmt(g)}</b> öder ama 45 sn boyunca kendi gelirin %15 düşer.`,`An entrepreneur wants to franchise your brand. They pay <b>${fmt(g)}</b> upfront, but your income drops 15% for 45 s.`),
+      buttons:[{label:L("Kabul et","Accept")+" (+"+fmt(g)+")", fn:()=>{ earn(g); addBoost(0.85,45,"Franchise −"+pct(15)); addLog("🏗️ +"+fmt(g)); afterAction(); }},
+        {label:L("Reddet (+5 itibar)","Decline (+5 reputation)"), cls:"save", fn:()=>{ S.reputation+=5; afterAction(); }}]};
+  }},
+  {w:1, good:1, choice:true, ico:"🎤", title:L("Röportaj Daveti","Interview Invite"), run:()=>({
+    html:L("Ulusal bir kanal seni canlı yayına çağırıyor. İyi geçerse viral olabilirsin (şans %60).","A national TV channel invites you live. If it goes well you might go viral (60% chance)."),
+    buttons:[{label:L("Katıl","Go on air"), fn:()=>{ S.reputation+=4; if(Math.random()<0.6){ addBoost(1.5,30,L("Röportaj +%50","Interview +50%")); S.reputation+=4; toast(L("Harika geçti! +%50 gelir","Nailed it! +50% income")); addLog("🎤 Viral!"); } else toast(L("Biraz heyecanlandın… itibar +4","A bit nervous… reputation +4")); afterAction(); }},
+      {label:L("Geç","Skip"), cls:"save"}]})
+  },
+  {w:1, good:0, choice:true, ico:"🏛️", title:L("Vergi Denetimi","Tax Audit"), req:()=>S.cash>500, run:()=>{
+    const c = Math.max(30, calcIncome(false)*40);
+    return {html:L(`Maliye kapıda. Mali müşavir tutarsan sorunsuz atlatırsın. Risk alırsan %50 ihtimalle nakdinin <b>%15</b>'i ceza olarak kesilir.`,`Auditors are at the door. Hire an accountant and you're safe. Take the risk and there's a 50% chance you lose <b>15%</b> of your cash.`),
+      buttons:[{label:L("Müşavir tut","Hire accountant")+" ("+fmt(c)+")", fn:()=>{ if(S.cash<c){ toast(L("Yeterli nakit yok","Not enough cash")); return; } S.cash-=c; toast(L("Denetim temiz geçti","Audit passed")); afterAction(); }},
+        {label:L("Risk al","Take the risk"), cls:"save", fn:()=>{ if(Math.random()<0.5){ const t=S.cash*0.15; S.cash-=t; sfx.bad(); toast(L("Ceza! −","Fined! −")+fmt(t)); addLog("🏛️ −"+fmt(t)); } else toast(L("Şanslısın, sorun çıkmadı","Lucky, all clear")); afterAction(); }}]};
+  }}
+]; }
+let lastEvent = Date.now();
+function rollEvent(force){
+  if(!force){
+    if(document.hidden || modalOpen || paused) return;
+    if(Date.now()-lastEvent < 25000) return;
+    if(S.totalEarned < 20) return;
+    if(Math.random() > Math.min(0.6, 0.25 + S.staff.marketer*0.03)) return;
+  }
+  const goodW = 1 + S.staff.marketer*0.1;
+  const pool = EVENTS.filter(e=>!e.req || e.req());
+  const tot = pool.reduce((s,e)=>s+e.w*(e.good?goodW:1),0);
+  let r = Math.random()*tot, ev = pool[0];
+  for(const e of pool){ r -= e.w*(e.good?goodW:1); if(r<=0){ ev=e; break; } }
+  lastEvent = Date.now(); S.stats.events++; track("event");
+  const res = ev.run();
+  (ev.good ? sfx.event : sfx.bad)();
+  if(ev.choice) openModal({ico:ev.ico, title:ev.title, html:res.html, buttons:res.buttons});
+  else {
+    const btns = [{label:L("Tamam","OK")}];
+    if(ev.gift) btns.unshift({ad:true, label:L("📺 Reklam izle: 2 katı","📺 Watch ad: double it"), cls:"adbtn", fn:()=>{ rewarded(()=>{ const g=gift(ev.gift); toast("📺 +"+fmt(g)); afterAction(); }); }});
+    openModal({ico:ev.ico, title:ev.title, html:res, buttons:btns});
+    addLog(ev.ico+" "+ev.title);
+  }
+  afterAction(false);
+}
+
+// Golden bag
+let goldenTimer = null, goldenNext = Date.now() + 40000;
+function spawnGolden(){
+  const g = $("golden");
+  g.style.left = (20 + Math.random()*Math.max(10, innerWidth-90)) + "px";
+  g.style.top = (Math.min(140, innerHeight*0.3) + Math.random()*Math.max(10, innerHeight*0.55)) + "px";
+  g.classList.add("show");
+  clearTimeout(goldenTimer); goldenTimer = setTimeout(()=>g.classList.remove("show"), 9000);
+}
+function clickGolden(){
+  const g = $("golden"); const r = g.getBoundingClientRect(); const x=r.left+20, y=r.top+20;
+  g.classList.remove("show"); clearTimeout(goldenTimer);
+  S.stats.golden++; track("golden"); sfx.gold(); particles(x, y, "✨", 10);
+  const roll = Math.random();
+  if(roll < 0.55){ const v = Math.max(30, calcIncome(false)*60 + bestJob().pay*workMult()*25); earn(v); floatMoney(v,x,y,"#facc15"); toast("💰 +"+fmt(v)); }
+  else if(roll < 0.85){ addBoost(3, 15, L("Altın Saat ×3","Golden Hour ×3")); toast(L("✨ Altın Saat! 15 sn gelir ×3","✨ Golden Hour! Income ×3 for 15 s")); }
+  else { addBoost(7, 8, L("Çılgın Kazanç ×7","Frenzy ×7")); toast(L("🤑 Çılgın Kazanç! 8 sn gelir ×7","🤑 Frenzy! Income ×7 for 8 s")); }
+  goldenNext = Date.now() + 45000 + Math.random()*60000;
+  afterAction(false);
+}
+
+// ================= ACHIEVEMENTS / LEVEL =================
+function checkAchieve(){
+  ACHIEVEMENTS.forEach(a=>{
+    if(!S.achievements[a.id] && a.check()){
+      S.achievements[a.id] = true; S.reputation += 3;
+      toast("🏅 "+L("Başarım: ","Achievement: ")+a.name); sfx.level(); addLog("🏅 "+a.name);
+    }
+  });
+}
+function checkLevel(){
+  const l = lvl();
+  if(l > S.lastLv){
+    const oldT = title(S.lastLv)[1], t = title(l);
+    S.lastLv = l;
+    if(t[1] !== oldT){ showLevelUp(t[1].toLocaleUpperCase(LANG)+"!", L("Yeni unvan • Seviye ","New title • Level ")+l, t[2]); CG.happy(); }
+    else showLevelUp(L("SEVİYE ","LEVEL ")+l, t[1], "⬆️");
+  }
+}
+
+// ================= RENDER =================
+function setHTML(el, html){ if(el && el._h !== html){ el.innerHTML = html; el._h = html; } }
+const btn = (act, arg, label, cost, extra="", cls="action") => `<button class="${cls}" data-act="${act}" data-arg="${arg}"${cost!=null?` data-cost="${cost}"`:""} ${extra}>${label}</button>`;
+
+function updateHeader(){
+  const inc = calcIncome(), net = netWorth(), l = lvl(), t = title(l);
+  $("mCash").textContent = fmt(S.cash);
+  $("mInc").textContent = "+"+fmt(inc)+perSec();
+  $("cash").textContent = fmt(S.cash);
+  $("income").textContent = "+"+fmt(inc)+" "+perSec();
+  $("net").textContent = fmt(net);
+  $("rank").textContent = t[2]+" "+t[1]+" • Lv."+l;
+  $("prestigeInfo").textContent = S.prestige>0 ? "♻️ "+L("Prestij ","Prestige ")+S.prestige+" • "+L("kalıcı +%"+(S.prestige*12)+" gelir","permanent +"+(S.prestige*12)+"% income") : "";
+  const now = Date.now();
+  setHTML($("boosts"), S.boosts.filter(b=>b.until>now).map(b=>`<span class="chip ${b.mult<1?"bad":""}">${esc(b.label)} • ${Math.ceil((b.until-now)/1000)}${L("sn","s")}</span>`).join(""));
+  const cEl = $("combo"); cEl.classList.toggle("on", combo>=3); cEl.textContent = "🔥 "+L("Kombo","Combo")+" "+combo+" • ×"+(1+combo*0.02).toFixed(2);
+  const j = bestJob(); $("workBtn").textContent = j.ico+" "+L("Çalış","Work")+": "+j.name+" — +"+fmt(workGain(j));
+  // ad boost button
+  const ab = $("adBoostBtn");
+  if(adsEnabled() && S.totalEarned > 30){
+    ab.classList.remove("hidden");
+    const left = AD_BOOST_CD - (now - S.adBoostAt);
+    ab.disabled = left > 0;
+    ab.textContent = left > 0 ? "📺 "+L("Tekrar: ","Again in: ")+fmtTime(left/1000) : "📺 "+L("Reklam izle → 3 dk gelir ×2","Watch ad → income ×2 for 3 min");
+  } else ab.classList.add("hidden");
+  const m = MISSIONS.find(x=>!x.done());
+  if(m){ $("mission").textContent = m.t; $("missionBar").style.width = clamp(m.p())*100+"%"; $("missionGo").dataset.arg = m.tab; $("missionGo").style.display = m.tab==="home"?"none":""; }
+  else { $("mission").textContent = L("Tüm hedefler tamam — efsanesin! 👑","All goals complete — you're a legend! 👑"); $("missionBar").style.width = "100%"; $("missionGo").style.display="none"; }
+  $("status").textContent = L("Varlıklar: ","Assets: ")+fmt(assets())+(S.debt>0 ? " • "+L("Borç: ","Debt: ")+fmt(S.debt) : "");
+  $("sBiz").textContent = ownedBiz() + (S.lemon>0?1:0);
+  $("sStaff").textContent = totalStaff();
+  $("sRep").textContent = int(S.reputation);
+  $("sPrestige").textContent = S.prestige;
+  $("dot-home").classList.toggle("on", S.daily.quests.some(q=>!q.c && q.p>=q.t) || S.login.last!==dayStr());
+  $("dot-more").classList.toggle("on", net >= prestigeNeed());
+  $("dot-biz").classList.toggle("on", BIZ.some((b,i)=>S.biz[i]===0 && bizUnlocked(i) && S.cash>=b.base));
+  checkLevel();
+}
+
+function renderJobs(){
+  let html = "", shownLocked = 0;
+  JOBS.forEach((j,i)=>{
+    const ok = j.req();
+    if(!ok){ if(shownLocked>=2) return; shownLocked++; }
+    html += `<div class="job ${ok?"":"locked"}"><div class="ico">${j.ico}</div><div class="grow"><b>${j.name}</b>
+      <div class="muted">${ok ? "+"+fmt(j.pay*workMult())+L(" + gelir payı"," + income share") : "🔒 "+j.rt}</div></div>
+      ${ok ? btn("job", i, L("Yap","Do it")) : btn("job", i, L("Kilitli","Locked"), null, "disabled")}</div>`;
+  });
+  setHTML($("jobsList"), html);
+}
+
+function renderBiz(){
+  document.querySelectorAll("#buyMode button").forEach(b=>b.classList.toggle("on", b.dataset.arg===S.buyMode));
+  let html = "";
+  const lc = lemonCost(), lnm = nextMilestone(S.lemon,[10,25,50]);
+  html += `<div class="card"><div class="row"><b style="font-size:14px">🍋 ${L("Limonata Standı","Lemonade Stand")}</b><span class="pill">Lv.${S.lemon}</span></div>
+    <div class="muted">${S.lemon>0 ? "+"+fmt(lemonIncome()*incomeMult())+perSec() : L("Kurunca +","Build for +")+fmt(LEMON.inc*incomeMult(false))+perSec()}${lnm?` • Lv.${lnm}: ×2`:""}</div>
+    ${lnm?`<div class="bar"><div class="fill" style="width:${S.lemon/lnm*100}%"></div></div>`:""}
+    ${S.lemon>=LEMON.max ? btn("lemon",0,"MAX",null,"disabled") : btn("lemon",0,fmt(lc)+" — "+(S.lemon?L("Yükselt","Upgrade"):L("Kur","Build")),lc)}</div>`;
+  BIZ.forEach((b,i)=>{
+    const lv = S.biz[i], unlocked = bizUnlocked(i);
+    if(!unlocked && i>0 && !bizUnlocked(i-1)) return;
+    const n = S.buyMode==="max" ? Math.max(1,bizMaxN(i)) : +S.buyMode;
+    const c = bizCostN(i,n), nm = nextMilestone(lv);
+    const gainNext = (bizIncome(i, lv+n) - bizIncome(i)) * incomeMult();
+    html += `<div class="card ${unlocked?"":"locked"}"><div class="row"><b style="font-size:14px">${b.ico} ${b.name}</b><span class="pill">Lv.${lv}</span></div>
+      <div class="muted">${lv>0 ? L("Gelir: +","Income: +")+fmt(bizIncome(i)*incomeMult())+perSec() : unlocked ? L("Henüz açılmadı","Not opened yet") : "🔒 "+L("Önce "+BIZ[i-1].name+" aç","Open "+BIZ[i-1].name+" first")}</div>
+      ${lv>0&&nm?`<div class="row muted small" style="margin-top:4px"><span>${L("Sonraki ×2: Lv.","Next ×2: Lv.")}${nm}</span><span>${lv}/${nm}</span></div><div class="bar"><div class="fill" style="width:${lv/nm*100}%"></div></div>`:""}
+      ${btn("biz", i, `${fmt(c)} — ${lv?L("Yükselt","Upgrade"):L("Satın Al","Buy")} ${n>1?"×"+n:""} <span style="opacity:.6">(+${fmt(gainNext)}${perSec()})</span>`, c, unlocked?"":'data-lock="1"')}</div>`;
+  });
+  setHTML($("bizList"), html);
+  const cap = OFFICES[S.office].cap;
+  $("staffCount").textContent = totalStaff()+" / "+cap;
+  $("staffBar").style.width = Math.min(100, totalStaff()/cap*100)+"%";
+  setHTML($("staffTypes"), STAFF.map(t=>{
+    const ok = t.req(), c = staffCost(t), full = totalStaff()>=cap;
+    return `<div class="card ${ok?"":"locked"}" style="padding:12px"><div class="row"><b>${t.ico} ${t.name}</b><span class="pill">×${S.staff[t.key]}</span></div>
+      <div class="muted">${ok ? t.desc : "🔒 "+t.rt}</div>
+      ${btn("hire", t.key, full ? L("Kapasite dolu","Capacity full") : fmt(c)+" — "+L("İşe Al","Hire"), c, (!ok||full)?'data-lock="1"':"")}</div>`;
+  }).join(""));
+  const o = OFFICES[S.office], nx = OFFICES[S.office+1];
+  $("officeLv").textContent = "Lv."+S.office;
+  setHTML($("officeCard"), `<div class="row"><b>${o.name}</b><span class="muted">${L("Kapasite","Capacity")} ${o.cap} • +${pct(Math.round(o.bonus*100))}</span></div>
+    ${nx ? `<div class="muted" style="margin-top:4px">${L("Sonraki","Next")}: ${nx.name} — ${nx.cap} ${L("kapasite","capacity")}, +${pct(Math.round(nx.bonus*100))} ${L("gelir","income")}</div>`+btn("office",0,fmt(nx.cost)+" — "+L("Yükselt","Upgrade"),nx.cost,"","primary") : `<div class="muted">${L("Maksimum ofis","Top office")} 🏙️</div>`}`);
+}
+
+function renderLife(){
+  const l = lvl(), t = title(l);
+  $("charName").textContent = t[1]; $("avatar").textContent = t[2];
+  $("charSub").textContent = L("Seviye ","Level ")+l+" • "+L("İtibar ","Reputation ")+int(S.reputation);
+  const a = Math.pow(10,(l-1)/2), b = Math.pow(10,l/2);
+  $("xpBar").style.width = clamp((S.totalEarned-a)/(b-a))*100+"%";
+  $("xpTxt").textContent = L("Sonraki seviye: "+fmt(b)+" toplam kazanç","Next level: "+fmt(b)+" total earned");
+  const oc = offlineCaps();
+  setHTML($("charStats"), `
+    <div class="stat-box"><b>+${pct(Math.round((workMult()/prestigeMult()-1)*100))}</b><span>${L("İş bonusu","Work bonus")}</span></div>
+    <div class="stat-box"><b>×${(incomeMult(false)).toFixed(2)}</b><span>${L("Gelir çarpanı","Income multiplier")}</span></div>
+    <div class="stat-box"><b>−${pct(Math.round(shareDiscount()*100))}</b><span>${L("Hisse indirimi","Stock discount")}</span></div>
+    <div class="stat-box"><b>${oc.h}${L("sa","h")} • ${pct(Math.round(oc.e*100))}</b><span>${L("Offline kazanç","Offline earnings")}</span></div>`);
+  setHTML($("shopList"), ITEMS.map(it=>{
+    const lv = itemLv(it.id), c = it.base*Math.pow(ITEM_G, lv), max = lv>=ITEM_MAX;
+    return `<div class="item"><div class="ico">${it.ico}</div><div class="grow"><b>${it.name}</b> <span class="tag">${lv}/${ITEM_MAX}</span><div class="muted">${it.desc}</div></div>
+      ${max ? btn("item",it.id,"MAX",null,"disabled") : btn("item",it.id,fmt(c)+" — "+(lv?L("Yükselt","Upgrade"):L("Al","Buy")),c)}</div>`;
+  }).join(""));
+  const ownedCard = (x, act, eff) => `<div class="item"><div class="ico">${x.ico}</div><div class="grow"><b>${x.name}</b><div class="muted">${eff}</div><div class="muted small">${L("İtibar","Reputation")} +${x.rep}</div></div>
+      ${(act==="veh"?S.veh:S.house)[x.id] ? `<button class="action" disabled>✓ ${L("Sahipsin","Owned")}</button>` : btn(act,x.id,fmt(x.cost)+" — "+L("Al","Buy"),x.cost)}</div>`;
+  setHTML($("vehList"), VEHICLES.map(v=>ownedCard(v,"veh", v.work?L("İş","Work")+" +"+pct(v.work*100):L("Gelir","Income")+" +"+pct(v.inc*100))).join(""));
+  setHTML($("houseList"), HOUSES.map(h=>ownedCard(h,"house", `Offline ${h.offH}${L("sa","h")} • ${pct(Math.round(h.offE*100))}`)).join(""));
+}
+
+function renderBank(){
+  const avail = creditAvail(), ratio = debtRatio(), locked = creditLocked();
+  $("creditLimit").textContent = fmt(avail);
+  $("loanInfo").textContent = locked ? L("🔒 Borç oranın %60'ı aştı — yeni kredi kilitli.","🔒 Debt ratio above 60% — new loans locked.") : L("Limit: ","Limit: ")+fmt(creditLimit());
+  setHTML($("loanBtns"), [0.1,0.25,0.4].map(p=>btn("loan",p,pct(p*100)+"<br><small>"+fmt(Math.floor(avail*p))+"</small>",null,(locked||avail*p<100)?'disabled':"")).join(""));
+  $("debt").textContent = fmt(S.debt);
+  $("interestInfo").textContent = L("Faiz: ","Interest: ")+pct((interestRate()*100).toFixed(2))+L(" / 30 sn"," / 30 s") + (S.debt>0 ? " (≈"+fmt(S.debt*interestRate())+")" : "");
+  $("ratioTxt").textContent = pct(Math.round(ratio*100));
+  $("debtBar").style.width = Math.min(100, ratio*100)+"%";
+  const pen = debtPenalty();
+  let st = "";
+  if(ratio > 0.9) st = L("🚨 Aşırı borç! Nakitten otomatik kesinti ve itibar kaybı.","🚨 Extreme debt! Automatic deductions and reputation loss.");
+  else if(ratio > 0.75) st = L("⚠️ İtibarın eriyor. ","⚠️ Your reputation is dropping. ");
+  if(pen < 1) st += " "+L("Gelir cezası: −","Income penalty: −")+pct(Math.round((1-pen)*100));
+  else if(S.debt>0) st = st || L("Borç kontrol altında ✅","Debt under control ✅");
+  $("debtPenaltyInfo").textContent = st;
+  setHTML($("rivals"), RIVALS.map((r,i)=>{
+    const n = S.rivals[i], c = rivalCost(i);
+    return `<div class="card rival"><div class="row"><b>${r.ico} ${r.name}</b><span class="pill">${n}/5</span></div>
+      <div class="muted">${n ? L("Ortaklık bonusu: +","Partnership bonus: +")+pct(n*4) : L("Henüz anlaşma yok","No deal yet")}</div>
+      ${n>=5 ? btn("rival",i,L("Tam ortaklık ✓","Full partnership ✓"),null,"disabled") : btn("rival",i,fmt(c)+" — "+L("Anlaş","Make a deal"),c)}</div>`;
+  }).join(""));
+}
+
+function spark(h){
+  const mn = Math.min(...h), mx = Math.max(...h), rg = (mx-mn)||1;
+  const pts = h.map((v,i)=>`${(i/(h.length-1)*100).toFixed(1)},${(26-(v-mn)/rg*24).toFixed(1)}`).join(" ");
+  const up = h[h.length-1] >= h[0];
+  return `<svg class="spark" viewBox="0 0 100 28" preserveAspectRatio="none"><polyline points="${pts}" fill="none" stroke="${up?"#4ade80":"#ef4444"}" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>`;
+}
+function renderStock(){
+  let pv = 0; COMPANIES.forEach((c,i)=>{ if(S.shares[i]) pv += c.p*S.mkt[i]*(Math.pow(SH_G,S.shares[i])-1)/(SH_G-1)*0.9; });
+  setHTML($("portfolio"), `<div class="kv"><span>${L("Portföy değeri","Portfolio value")}</span><b>${fmt(pv)}</b></div>
+    <div class="kv"><span>${L("Temettü geliri","Dividend income")}</span><b class="up">+${fmt(totalDividends()*incomeMult())}${perSec()}</b></div>
+    <div class="kv"><span>${L("Hisse indirimi (Finansçı + Saat)","Stock discount (Financier + Watch)")}</span><b>−${pct(Math.round(shareDiscount()*100))}</b></div>
+    <div class="muted small" style="margin-top:6px">${L("Her alım fiyatı %4 artırır. %51 = kontrol: temettü ×2 ve tüm gelire +%5. Fiyatlar piyasaya göre dalgalanır — ucuzken al, pahalıyken sat.","Each purchase raises the price by 4%. 51% = control: dividends ×2 and +5% to all income. Prices fluctuate — buy low, sell high.")}</div>`);
+  setHTML($("stockList"), COMPANIES.map((c,i)=>{
+    const sh = S.shares[i], p = sharePrice(i), h = S.hist[i];
+    const ch = (h[h.length-1]/h[h.length-2]-1)*100;
+    let p5 = 0; for(let k=0;k<5;k++){ if(sh+k>=100) break; p5 += sharePrice(i, sh+k); }
+    return `<div class="card stock"><div class="row"><b>${c.ico} ${c.name}</b><span class="pill">${pct(sh)}${sh>=51?" 👑":""}</span></div>
+      <div class="row"><span style="font-size:18px;font-weight:900">${fmt(p)}</span><span class="${ch>=0?"up":"down"} small" style="font-weight:800">${ch>=0?"▲":"▼"} ${pct(Math.abs(ch).toFixed(1))}</span></div>
+      ${spark(h)}
+      <div class="muted small">${L("Temettü","Dividend")}: +${fmt(c.p*DIV*(sh>=51?2:1)*incomeMult(false))}${perSec()} ${L("her %1 için","per 1%")}${sh?` • ${L("Satış","Sell")}: ${fmt(shareSell(i))}`:""}</div>
+      ${sh<51 ? `<div class="bar"><div class="fill blue" style="width:${sh/51*100}%"></div></div>` : ""}
+      <div class="btnrow">${sh>=100 ? btn("x",0,pct(100)+" ✓",null,"disabled") : btn("buyShare",i+":1",L("%1 Al","Buy 1%"),p)+btn("buyShare",i+":5",L("%5 Al","Buy 5%"),p5,"","action alt")}${sh?btn("sellShare",i,L("Sat","Sell"),null,"","action alt"):""}</div></div>`;
+  }).join(""));
+}
+
+function renderHolding(){
+  $("holdingName").textContent = holdingName();
+  let hv = 0; const list = [];
+  COMPANIES.forEach((c,i)=>{ if(S.shares[i]>=51){ const v = c.p*100*S.mkt[i]*S.shares[i]/100; hv += v; list.push({c,i,v}); } });
+  BIZ.forEach((b,i)=>{ if(S.biz[i]) hv += b.base*(Math.pow(G,S.biz[i])-1)/(G-1)*0.5; });
+  $("holdingValue").textContent = fmt(hv);
+  const n = list.length;
+  $("holdingRank").textContent = n>=8?L("🌐 Küresel İmparatorluk","🌐 Global Empire"):n>=5?L("👑 İmparatorluk","👑 Empire"):n>=3?L("🏛️ Konglomera","🏛️ Conglomerate"):n>=1?"🏢 Holding":L("🌱 Başlangıç","🌱 Startup");
+  $("holdingBonus").textContent = n ? L("Kontrol bonusu: +","Control bonus: +")+pct(n*5) : "";
+  setHTML($("holdingList"), n===0
+    ? `<div class="card"><div class="muted">${L("Henüz kontrol ettiğin şirket yok. Borsa'da bir şirketin %51'ini al.","You don't control any company yet. Buy 51% of one in Stocks.")}</div></div>`
+    : list.map(x=>`<div class="card holding"><div class="row"><b>${x.c.ico} ${x.c.name}</b><span class="pill">${pct(S.shares[x.i])} 👑</span></div>
+        <div class="row"><b>${fmt(x.v)}</b><span class="up small">+${fmt(dividend(x.i)*incomeMult())}${perSec()}</span></div></div>`).join(""));
+  setHTML($("countriesList"), COUNTRIES.map((c,i)=>{
+    const lv = S.countries[i], cost = countryCost(i);
+    const lockTxt = !S.biz[5] ? L("Lojistik gerekli","Requires Logistics") : S.reputation < c.rep ? L("İtibar ","Reputation ")+c.rep+L(" gerekli"," needed")+" ("+int(S.reputation)+")" : "";
+    return `<div class="card country ${lockTxt?"locked":""}"><div class="row"><b>${c.flag} ${c.name}</b><span class="pill">Lv.${lv}</span></div>
+      <div class="muted">${lv ? L("Gelir: +","Income: +")+fmt(countryIncome(i)*incomeMult())+perSec() : L("Açınca +","Open for +")+fmt(c.income*incomeMult(false))+perSec()} ${lv<5?"• Lv.5: ×2":""}</div>
+      ${lockTxt ? `<div class="muted small">🔒 ${lockTxt}</div>` : ""}
+      ${btn("country",i,fmt(cost)+" — "+(lv?L("Yükselt","Upgrade"):L("Pazara Gir","Enter Market")),cost,lockTxt?'data-lock="1"':"")}</div>`;
+  }).join(""));
+}
+
+function renderMore(){
+  const need = prestigeNeed(), net = netWorth();
+  $("prestigeLv").textContent = S.prestige;
+  $("prestigeNeed").textContent = fmt(need);
+  $("prestigeBar").style.width = clamp(net/need)*100+"%";
+  $("prestigeBtn").disabled = net < need;
+  $("prestigeBtn").textContent = net>=need ? L("♻️ Prestij Yap (+%12)","♻️ Prestige (+12%)") : L("Hazır değil","Not ready")+" ("+pct(Math.floor(clamp(net/need)*100))+")";
+  $("prestigeBonus").textContent = S.prestige>0 ? L("Mevcut bonus: +","Current bonus: +")+pct(S.prestige*12) : L("Bonus: Yok","Bonus: None");
+  let ac = 0;
+  setHTML($("achieveList"), `<div class="grid wide3">`+ACHIEVEMENTS.map(a=>{
+    const ok = !!S.achievements[a.id]; if(ok) ac++;
+    return `<div class="card achieve ${ok?"":"locked"}" style="margin:0;padding:10px"><b>${ok?a.ico:"🔒"} ${a.name}</b><div class="muted small">${a.desc}</div></div>`;
+  }).join("")+`</div>`);
+  $("achieveBadge").textContent = ac+"/"+ACHIEVEMENTS.length;
+  const st = S.stats;
+  setHTML($("statsCard"), [
+    [L("Toplam kazanç (bu tur)","Earned (this run)"), fmt(S.totalEarned)], [L("Tüm zamanlar kazanç","All-time earnings"), fmt(S.lifetime)],
+    [L("En yüksek gelir","Peak income"), fmt(st.maxIncome)+perSec()], [L("Çalışma sayısı","Times worked"), int(st.works)],
+    [L("Fırsat çantası","Money bags"), st.golden], [L("Yaşanan olay","Events"), st.events], [L("Tamamlanan görev","Quests completed"), st.quests],
+    [L("Alınan kredi","Loans taken"), st.loans], [L("Oynama süresi","Play time"), fmtTime(st.playTime)]
+  ].map(r=>`<div class="kv"><span>${r[0]}</span><b>${r[1]}</b></div>`).join(""));
+  $("soundBtn").textContent = S.settings.sound ? L("🔊 Ses: Açık","🔊 Sound: On") : L("🔇 Ses: Kapalı","🔇 Sound: Off");
+  $("langBtn").textContent = "🌐 "+L("Dil: Türkçe","Language: English");
+}
+
+function renderQuests(){
+  refreshDaily();
+  let qd = 0;
+  setHTML($("dailyQuests"), S.daily.quests.map((q,i)=>{
+    const done = q.p >= q.t; if(q.c||done) qd++;
+    return `<div class="card quest"><div class="row"><b>${esc(questDesc(q))}</b><span class="pill">${q.c?"✓": (q.type==="earn"?pct(Math.floor(q.p/q.t*100)):Math.floor(q.p)+"/"+q.t)}</span></div>
+      <div class="bar"><div class="fill" style="width:${clamp(q.p/q.t)*100}%"></div></div>
+      ${q.c ? `<button class="action" disabled>${L("Alındı ✓","Claimed ✓")}</button>` : done ? btn("quest",i,"🎁 "+L("Ödülü Al","Claim")+" (+"+fmt(questReward(i))+")",null,"","action gold") : `<button class="action" disabled>${L("Devam ediyor","In progress")}</button>`}</div>`;
+  }).join(""));
+  $("questBadge").textContent = qd+"/3";
+  if(S.login.last !== dayStr()){
+    const {st, r} = loginReward();
+    setHTML($("loginCard"), `<div class="card" style="border-left:4px solid var(--yellow)"><div class="row"><b>🎁 ${L("Günlük Giriş Bonusu","Daily Login Bonus")}</b><span class="pill">🔥 ${st}${L(". gün"," day")}</span></div>
+      <div class="muted">${L("Seriyi koru, ödül 7 güne kadar artar.","Keep your streak — rewards grow for 7 days.")}</div>
+      <div class="btnrow">${btn("login",0,L("Al","Claim")+": +"+fmt(r),null,"","action gold")}${adsEnabled()?btn("login",1,"📺 2× +"+fmt(r*2),null,"","adbtn"):""}</div></div>`);
+  } else setHTML($("loginCard"), `<div class="card"><div class="row"><b>🎁 ${L("Günlük bonus alındı","Daily bonus claimed")}</b><span class="pill">🔥 ${S.login.streak} ${L("gün seri","day streak")}</span></div><div class="muted">${L("Yarın tekrar gel!","Come back tomorrow!")}</div></div>`);
+}
+function renderLog(){
+  setHTML($("eventLog"), S.log.length ? S.log.map(l=>{ const m = Math.floor((Date.now()-l.t)/60000); return `<div class="log">${esc(l.txt)} <span class="muted small">• ${m<1?L("az önce","just now"):m+L(" dk önce"," min ago")}</span></div>`; }).join("") : `<div class="muted">${L("Henüz olay yok...","No events yet...")}</div>`);
+}
+
+let activeTab = "home";
+const PANEL_RENDER = {home:()=>{renderQuests();renderLog();}, jobs:renderJobs, biz:renderBiz, life:renderLife, bank:renderBank, stock:renderStock, holding:renderHolding, more:renderMore};
+function renderActive(){ PANEL_RENDER[activeTab](); refreshAfford(); }
+function render(){ updateHeader(); renderActive(); }
+function refreshAfford(){ document.querySelectorAll("[data-cost]").forEach(b=>{ b.disabled = b.dataset.lock==="1" || S.cash + 1e-9 < +b.dataset.cost; }); }
+function afterAction(full=true){ if(!booted) return; checkAchieve(); if(full) render(); else updateHeader(); }
+function switchTab(t){
+  if(!PANEL_RENDER[t]) return;
+  activeTab = t;
+  document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active", p.id===t));
+  document.querySelectorAll("[data-tab]").forEach(b=>b.classList.toggle("active", b.dataset.tab===t));
+  renderActive();
+  window.scrollTo({top:0});
+}
+function rerenderAll(){
+  defineContent(); applyStatic();
+  Object.keys(PANEL_RENDER).forEach(k=>{ document.querySelectorAll("#"+k+" *").forEach(el=>{ if(el._h) el._h = null; }); });
+  render();
+}
+
+// ================= INPUT =================
+const ACT = {
+  work:(a,el)=>doWork(bestJob(), el),
+  job:(a,el)=>{ const j = JOBS[+a]; if(j && j.req()) doWork(j, el); },
+  lemon:()=>buyLemon(),
+  biz:a=>buyBiz(a),
+  mode:a=>{ S.buyMode = a; renderBiz(); refreshAfford(); },
+  hire:a=>hire(a),
+  office:()=>buyOffice(),
+  item:a=>buyItem(a),
+  veh:a=>buyOwned(VEHICLES, S.veh, a),
+  house:a=>buyOwned(HOUSES, S.house, a),
+  loan:a=>takeLoan(+a),
+  repay:a=>repay(a==="all"),
+  rival:a=>rivalDeal(a),
+  buyShare:a=>{ const [i,n] = a.split(":"); buyShares(+i, +n); },
+  sellShare:a=>sellShare(a),
+  country:a=>buyCountry(a),
+  quest:a=>claimQuest(+a),
+  login:a=>claimLogin(a==="1"),
+  adBoost:()=>adBoost(),
+  prestige:()=>doPrestige(),
+  tab:a=>switchTab(a),
+  golden:()=>clickGolden(),
+  sound:()=>{ S.settings.sound = !S.settings.sound; renderMore(); },
+  lang:()=>{ LANG = LANG==="tr" ? "en" : "tr"; try{ localStorage.setItem("zenginlik_lang", LANG); }catch(e){} rerenderAll(); },
+  save:()=>toast(persist() ? L("Kaydedildi 💾","Saved 💾") : L("Kayıt başarısız","Save failed")),
+  rename:()=>openModal({ico:"✏️", title:L("Holding İsmi","Empire Name"), html:`<input id="nameInput" maxlength="24" placeholder="${L("Altın Holding","Golden Corp")}" value="${esc(holdingName())}">`,
+    buttons:[{label:L("Kaydet","Save"), fn:()=>{ const n = $("nameInput").value.trim(); if(n.length<2){ toast(L("En az 2 karakter","At least 2 characters")); return false; } S.holdingName = n.slice(0,24); render(); }},{label:L("İptal","Cancel"),cls:"save"}]}),
+  export:()=>{ let code=""; try{ code = btoa(unescape(encodeURIComponent(JSON.stringify(S)))); }catch(e){}
+    openModal({ico:"📤", title:L("Kaydı Dışa Aktar","Export Save"), html:`<div class="muted">${L("Bu kodu sakla; İçe Aktar ile geri yükleyebilirsin.","Keep this code; load it back with Import.")}</div><textarea id="ioText" readonly>${code}</textarea>`,
+      buttons:[{label:L("Kopyala","Copy"), fn:()=>{ const t=$("ioText"); t.select(); try{ document.execCommand("copy"); }catch(e){} toast(L("Kopyalandı","Copied")); return false; }},{label:L("Kapat","Close"),cls:"save"}]}); },
+  import:()=>openModal({ico:"📥", title:L("Kaydı İçe Aktar","Import Save"), html:`<div class="muted">${L("Kodu yapıştır. Mevcut ilerleme silinir.","Paste your code. Current progress will be replaced.")}</div><textarea id="ioText"></textarea>`,
+    buttons:[{label:L("Yükle","Load"), fn:()=>{ try{ const x = JSON.parse(decodeURIComponent(escape(atob($("ioText").value.trim())))); if(!x || x.v!==9) throw 0; S = merge(fresh(), x); persist(); toast(L("Kayıt yüklendi ✅","Save loaded ✅")); render(); }catch(e){ toast(L("Geçersiz kod","Invalid code")); return false; } }},{label:L("İptal","Cancel"),cls:"save"}]}),
+  reset:()=>confirmBox("🗑️", L("Oyunu Sıfırla","Reset Game"), L("Her şey (başarımlar ve prestij dahil) kalıcı olarak silinecek. Emin misin?","Everything (including achievements and prestige) will be deleted permanently. Are you sure?"), L("Evet, sil","Yes, delete"), ()=>{ S = fresh(); refreshDaily(); persist(); combo=0; render(); })
+};
+document.addEventListener("click", e=>{
+  if(!booted) return;
+  ensureAudio();
+  const t = e.target.closest("[data-tab]");
+  if(t){ sfx.click(); switchTab(t.dataset.tab); return; }
+  const b = e.target.closest("[data-act]");
+  if(!b || b.disabled) return;
+  const f = ACT[b.dataset.act]; if(!f) return;
+  if(!["work","job","golden"].includes(b.dataset.act)) sfx.click();
+  f(b.dataset.arg, b);
+});
+
+// ================= LOOPS =================
+let lastTick = performance.now();
+function startLoops(){
+  setInterval(()=>{
+    const now = performance.now(); const dt = Math.min(5, (now-lastTick)/1000); lastTick = now;
+    if(paused) return;
+    const inc = calcIncome();
+    if(inc > 0){ const g = inc*dt; earn(g); track("earn", g); }
+    S.stats.playTime += dt;
+    if(inc > S.stats.maxIncome) S.stats.maxIncome = inc;
+    if(combo>0 && Date.now()-lastClick > 1500) combo = 0;
+    updateHeader();
+  }, 200);
+  setInterval(refreshAfford, 400);
+  setInterval(()=>{ if(paused) return; checkAchieve(); if(activeTab!=="stock") renderActive(); }, 2000);
+  setInterval(()=>{
+    if(paused) return;
+    for(let i=0;i<10;i++){
+      const shock = (Math.random()+Math.random()+Math.random()-1.5)*0.05;
+      S.mkt[i] = clamp(S.mkt[i]*Math.exp(shock) + (1-S.mkt[i])*0.03, 0.5, 2.2);
+      S.hist[i].push(S.mkt[i]); if(S.hist[i].length>24) S.hist[i].shift();
+    }
+    if(activeTab==="stock") renderActive();
+  }, 4000);
+  setInterval(()=>{
+    if(S.debt <= 0 || paused) return;
+    S.debt += S.debt*interestRate();
+    const r = debtRatio();
+    if(r > 0.75) S.reputation = Math.max(0, S.reputation-1);
+    if(r > 0.9){
+      const cut = Math.min(S.cash*0.1, S.debt);
+      if(cut > 0){ S.cash -= cut; S.debt -= cut; toast(L("🚨 Banka nakitten "+fmt(cut)+" kesti","🚨 The bank seized "+fmt(cut))); addLog("🚨 −"+fmt(cut)); }
+      S.reputation = Math.max(0, S.reputation-1);
+    }
+    if(activeTab==="bank") renderBank();
+  }, 30000);
+  setInterval(()=>rollEvent(false), 5000);
+  setInterval(()=>{ if(!document.hidden && !modalOpen && !paused && Date.now()>goldenNext && !$("golden").classList.contains("show")){ spawnGolden(); goldenNext = Date.now()+45000+Math.random()*60000; } }, 1000);
+  setInterval(persist, 15000);
+  document.addEventListener("visibilitychange", ()=>{ if(document.hidden) persist(); else lastTick = performance.now(); });
+  window.addEventListener("pagehide", persist);
+  document.addEventListener("keydown", e=>{
+    if(e.code==="Space" && !modalOpen && !["INPUT","TEXTAREA"].includes(document.activeElement.tagName)){ e.preventDefault(); doWork(bestJob(), $("workBtn")); }
+  });
+}
+
+// ================= BOOT =================
+function offlineEarnings(){
+  const now = Date.now(), away = now - (S.lastTime||now);
+  S.lastTime = now;
+  if(away <= 30000) return;
+  const oc = offlineCaps();
+  const secs = Math.min(away/1000, oc.h*3600);
+  if(S.debt > 0){ const ticks = Math.min(secs/30, 240); S.debt *= Math.pow(1+interestRate()*0.5, ticks); }
+  const earned = calcIncome(false)*secs*oc.e;
+  if(earned <= 1) return;
+  earn(earned);
+  setTimeout(()=>openModal({ico:"⏳", title:L("Tekrar hoş geldin!","Welcome back!"),
+    html:L(`Sen yokken <b>${fmtTime(away/1000)}</b> geçti.<br>İşletmelerin <b>${fmtTime(secs)}</b> boyunca %${Math.round(oc.e*100)} verimle çalıştı:`,
+           `You were away for <b>${fmtTime(away/1000)}</b>.<br>Your businesses worked for <b>${fmtTime(secs)}</b> at ${Math.round(oc.e*100)}% efficiency:`)
+      +`<br><br><span style="font-size:24px;font-weight:900;color:#4ade80">+${fmt(earned)}</span><br><br><span class="muted small">${L("Daha iyi konut = daha uzun ve verimli offline kazanç.","Better home = longer, more efficient offline earnings.")}</span>`,
+    buttons:[
+      {ad:true, label:L("📺 Reklam izle: 2 katı topla","📺 Watch ad: collect double")+" (+"+fmt(earned)+")", cls:"adbtn", fn:()=>{ rewarded(()=>{ earn(earned); floatMoney(earned); sfx.gold(); toast("📺 +"+fmt(earned)); afterAction(); }); }},
+      {label:L("Topla 💰","Collect 💰"), fn:()=>sfx.money()}
+    ]}), 300);
+}
+async function boot(){
+  await CG.init();
+  CG.loadingStart();
+  LANG = detectLang(CG.locale());
+  defineContent();
+  applyStatic();
+  S = load();
+  booted = true;
+  offlineEarnings();
+  S.lastLv = Math.max(S.lastLv||1, lvl());
+  refreshDaily();
+  checkAchieve();
+  render();
+  persist();
+  startLoops();
+  CG.loadingStop();
+  CG.gameplayStart();
+}
+boot();
+})();
+</script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("sw.js").catch(()=>{});});}</script>
+</body>
+</html>
